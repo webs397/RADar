@@ -6,7 +6,6 @@ __version__ = "0.0.1"
 address = 0x10
 tof = SMBus(1)
 
-
 class TFminiI2C:
     """
     Interface to the Benewake TFmini distance (Lidar-like) sensor with I2C interface.
