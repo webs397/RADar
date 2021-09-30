@@ -6,6 +6,7 @@ __version__ = "0.0.1"
 address = 0x10
 tof = SMBus(1)
 
+
 class TFminiI2C:
     """
     Interface to the Benewake TFmini distance (Lidar-like) sensor with I2C interface.
@@ -165,6 +166,10 @@ class TFminiI2C:
         self._setRegister(self.RegDistUnit, self.RangeUnit)
         return
 
+
+while True:
+    Sensor0 = TFminiI2C(1, 0x10)
+    print(Sensor0.readDistance())
 
 """
 Example usage:
