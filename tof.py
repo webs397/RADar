@@ -166,11 +166,6 @@ class TFminiI2C:
         self._setRegister(self.RegDistUnit, self.RangeUnit)
         return
 
-
-while True:
-    Sensor0 = TFminiI2C(1, 0x10)
-    print(Sensor0.readDistance())
-
 """
 Example usage:
 
