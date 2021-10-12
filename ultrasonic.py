@@ -6,16 +6,21 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 # GPIO PINS and other Variables
-Trigger = 3  # this is pin 15, this might not work on a pin that isn't PWM lets test
-Echo = 2  # this is pin 13
+Trigger1 = 3  # this is pin 15, this might not work on a pin that isn't PWM lets test
+Echo1 = 2  # this is pin 13
+Trigger2 = 5  # this is pin 18, this might not work on a pin that isn't PWM lets test
+Echo2 = 4  # this is pin 16
 TriggerTime = 0.00001  # This is 0.01ms
 
 # set GPIO in or out
-GPIO.setup(Trigger, GPIO.OUT)
-GPIO.setup(Echo, GPIO.IN)
+GPIO.setup(Trigger1, GPIO.OUT)
+GPIO.setup(Echo1, GPIO.IN)
+
+GPIO.setup(Trigger2, GPIO.OUT)
+GPIO.setup(Echo2, GPIO.IN)
 
 
-def distance():
+def distance(Trigger, Echo):
     # Pulse Trigger for set Time
     GPIO.output(Trigger, True)
     time.sleep(0.00001)
