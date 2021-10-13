@@ -80,7 +80,7 @@ def update(sensor1Average, sensor2Average, sensor3Average):
 def gpio_control(led):
     switcher = \
         {
-            1: GPIO.output(25, True),  # this is pin 37
+            # 1: GPIO.output(25, True),  # this is pin 37
             2: GPIO.output(24, True),  # this is pin 35
             3: GPIO.output(23, True),  # this is pin 33
             4: GPIO.output(22, True),  # this is pin 31
