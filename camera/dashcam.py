@@ -6,9 +6,6 @@ import io
 
 class CamConfigHandler:
     def __init__(self):
-        self.resolution = None
-        self.framerate = None
-        self.length = None
         self.vid_counter = None
         self.danger_counter = None
         self.data = None
@@ -18,9 +15,6 @@ class CamConfigHandler:
         with open('/home/pi/RADar/camera/config.json','r') as config_file:
             data = json.load(config_file)
             self.data = data
-            self.resolution = (data['res_width'], data['res_height'])
-            self.framerate = data['framerate']
-            self.length = data['length']
             self.vid_counter = data['video_counter']
             self.danger_counter = data['danger_counter']
             return self.data
@@ -41,8 +35,6 @@ class Dashcam:
         self.stream = picamera.PiCameraCircularIO(self.camera, seconds = 20)
         # using the configuration values
         self.config_handler = CamConfigHandler()
-        #self.camera.resolution = self.config_handler.resolution
-        #self.camera.framerate = self.config_handler.framerate
         self.vid_counter = self.config_handler.vid_counter
         self.danger_counter = self.config_handler.danger_counter
         # configuring folder structure
@@ -76,6 +68,7 @@ class Dashcam:
         try:
             while True:
                 self.camera.wait_recording(1)
+                print(self.save_video)
                 if self.save_video:
                     self.camera.wait_recording(10)
                     self.stream.copy_to(vid_name)
