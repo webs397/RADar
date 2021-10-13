@@ -168,6 +168,9 @@ def gpio_control():
 
 
 while True:
-    scan(5)
-    update()
-    time.sleep(1)
+    try:
+        scan(5)
+        update()
+        time.sleep(1)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
