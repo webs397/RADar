@@ -94,6 +94,7 @@ def update():
 
 
 def gpio_zuordnung(led_nr):
+    global LEDs
     if led_nr == 1:
         GPIO.output(LEDs[0], True)
         print('led activated: ', led_nr)
