@@ -24,9 +24,9 @@ def scan(scanAmount):
             sensor3 = 0
 
         # Collect Values in sensor array
-        distances[0][x-1] = sensor1
-        distances[1][x-1] = sensor2
-        distances[2][x-1] = sensor3
+        distances[0][x - 1] = sensor1
+        distances[1][x - 1] = sensor2
+        distances[2][x - 1] = sensor3
 
     # Format the collected values
     sensor1Average = 0
@@ -34,9 +34,9 @@ def scan(scanAmount):
     sensor3Average = 0
 
     for x in range(scanAmount):
-        sensor1Average += distances[0][x-1]
-        sensor2Average += distances[1][x-1]
-        sensor3Average += distances[2][x-1]
+        sensor1Average += distances[0][x - 1]
+        sensor2Average += distances[1][x - 1]
+        sensor3Average += distances[2][x - 1]
 
     sensor1Average /= scanAmount
     sensor2Average /= scanAmount
@@ -49,7 +49,7 @@ def scan(scanAmount):
     print("Sensor3:")
     print(sensor3Average)
 
-    return (sensor1Average,sensor2Average, sensor3Average)
+    return sensor1Average, sensor2Average, sensor3Average
 
 
 # Update LEDs for Sensor values
@@ -84,5 +84,6 @@ def gpio_control(led):
     return switcher.get(led, "nothing")
 
 
-update(scan(1))
-
+while True:
+    result = scan(1)
+    update(result[0], result[1], result[2])
