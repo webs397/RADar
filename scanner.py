@@ -24,9 +24,9 @@ def scan(scanAmount):
             sensor3 = 0
 
         # Collect Values in sensor array
-        distances[0][x] = sensor1
-        distances[1][x] = sensor2
-        distances[2][x] = sensor3
+        distances[0][x-1] = sensor1
+        distances[1][x-1] = sensor2
+        distances[2][x-1] = sensor3
 
     # Format the collected values
     sensor1Average = 0
