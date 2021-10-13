@@ -4,7 +4,7 @@ import time
 __version__ = "0.0.1"
 
 address = 0x10
-tof = SMBus(1)
+tofsensor = SMBus(1)
 
 
 class TFminiI2C:
