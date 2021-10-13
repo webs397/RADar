@@ -1,5 +1,6 @@
 import tof
 import ultrasonic
+import time
 import RPi.GPIO as GPIO
 
 GPIO.setup(25, GPIO.OUT)  # this is pin 37
@@ -26,6 +27,9 @@ GPIO.output(6, False),  # this is pin 22
 
 oldled = 0
 led = 0
+sensor1Average = 0
+sensor2Average = 0
+sensor3Average = 0
 
 def scan(scanAmount):
     distances = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
@@ -40,22 +44,19 @@ def scan(scanAmount):
         # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
         if sensor1 >= 2:
             sensor1 = 0
-
         if sensor2 > 6:
             sensor2 = 0
-
         if sensor3 > 10:
             sensor3 = 0
-
         # Collect Values in sensor array
         distances[0][x - 1] = sensor1
         distances[1][x - 1] = sensor2
         distances[2][x - 1] = sensor3
 
     # Format the collected values
-    sensor1Average = 0
-    sensor2Average = 0
-    sensor3Average = 0
+    global sensor1Average
+    global sensor2Average
+    global sensor3Average
 
     for x in range(scanAmount):
         sensor1Average += distances[0][x - 1]
@@ -73,19 +74,27 @@ def scan(scanAmount):
     print("Sensor3:")
     print(sensor3Average)
 
-    return sensor1Average, sensor2Average, sensor3Average
+    #return sensor1Average, sensor2Average, sensor3Average
 
 
 # Update LEDs for Sensor values
-def update(sensor1Average, sensor2Average, sensor3Average):
+def update():
     # LED is the value for which LED pin to trigger
     global led
     global oldled
-    led = sensor1Average
-    if sensor1Average == 0:
+    global sensor1Average
+    global sensor2Average
+    global sensor3Average
+
+    led = int(round(sensor1Average))
+    if sensor1Average <= 2:
+        led = sensor1Average
+    elif sensor2Average <= 6:
         led = sensor2Average
-        if sensor2Average == 0:
-            led = sensor3Average
+    elif sensor3Average <= 10:
+        led = sensor3Average
+    else:
+        led = 0
 
     gpio_control()
     return None
@@ -156,5 +165,6 @@ def gpio_control():
 
 
 while True:
-    result = scan(1)
-    update(result[0], result[1], result[2])
+    scan(5)
+    update()
+    time.sleep(1)
