@@ -2,6 +2,7 @@ import json
 import picamera
 import os
 import io
+import zmq
 
 
 class CamConfigHandler:
@@ -41,9 +42,10 @@ class Dashcam:
         self.folder_RADar = "/home/pi/RADar/"
         self.folder_vids = "videos/"
         self.folder_danger_vids = "danger_videos/"
-        # events
-        self.save_video = False
-        self.save_danger = False
+        # server stuff for communication
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REP)
+        self.socket.bind("tcp://*:5555")
 
         self.check_folder_structure()
         self.start_recording()
@@ -68,26 +70,23 @@ class Dashcam:
         try:
             while True:
                 self.camera.wait_recording(1)
-                print(self.save_video)
-                if self.save_video:
+                message = self.socket.recv()
+                msg_data = json.loads(message)
+                if msg_data['reason'] == 'demand':
                     self.camera.wait_recording(10)
                     self.stream.copy_to(vid_name)
                     self.save_video = False
                     self.vid_counter += 1
                     self.update_config()
+                    self.socket.send_string('saved demand video')
                     print('SAVED VIDEO ON DEMAND')
-                if self.save_danger:
+                if msg_data['reason'] == 'danger':
                     self.camera.wait_recording(10)
                     self.stream.copy_to(danger_name)
                     self.danger_counter += 1
                     self.save_danger = False
                     self.update_config()
+                    self.socket.send_string('saved danger video')
                     print('SAVED VIDEO BECAUSE OF DANGER')
         finally:
             self.camera.stop_recording()
-
-    def activate_video_saving(self):
-        self.save_video = True
-
-    def activate_danger_saving(self):
-        self.save_danger = True

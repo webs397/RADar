@@ -1,12 +1,23 @@
 import sys
 from camera.dashcam import *
 import time
+import zmq
 
 
 config_fucker = CamConfigHandler()
 print("CONFIG:")
 config_fucker.print_config()
 
-camera_man = Dashcam()
+
 time.sleep(25)
-camera_man.activate_video_saving()
+context = zmq.Context()
+socket = context.socket(zmq.REQ)
+socket.connetct("tcp://localhost:5555")
+
+package = {'reason':'demand'}
+
+print("sending request")
+socket.send_json(package)
+
+message = socket.recv()
+print("Received reply: ", message)
