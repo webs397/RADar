@@ -40,6 +40,13 @@ def scan(scanAmount):
     sensor2Average /= scanAmount
     sensor3Average /= scanAmount
 
+    print("Sensor1:")
+    print(sensor1Average)
+    print("Sensor2:")
+    print(sensor2Average)
+    print("Sensor3:")
+    print(sensor3Average)
+
     return sensor1Average, sensor2Average, sensor3Average
 
 
