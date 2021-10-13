@@ -31,8 +31,11 @@ sensor1Average = 0
 sensor2Average = 0
 sensor3Average = 0
 
+
 def scan(scanAmount):
-    distances = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+    sum1 = 0
+    sum2 = 0
+    sum3 = 0
     for x in range(scanAmount):
         # Read all Sensor distance values
         # sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
@@ -42,32 +45,20 @@ def scan(scanAmount):
         # sensor3 = tof.tofsensor.readDistance()
         sensor3 = 8
         # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
-        '''
-        if sensor1 >= 2:
-            sensor1 = 0
-        if sensor2 > 6:
-            sensor2 = 0
-        if sensor3 > 10:
-            sensor3 = 0
-        '''
+
         # Collect Values in sensor array
-        distances[0][x - 1] = sensor1
-        distances[1][x - 1] = sensor2
-        distances[2][x - 1] = sensor3
+        sum1 += sensor1
+        sum2 += sensor2
+        sum3 += sensor3
 
     # Format the collected values
     global sensor1Average
     global sensor2Average
     global sensor3Average
 
-    for x in range(scanAmount):
-        sensor1Average += distances[0][x - 1]
-        sensor2Average += distances[1][x - 1]
-        sensor3Average += distances[2][x - 1]
-
-    sensor1Average /= scanAmount
-    sensor2Average /= scanAmount
-    sensor3Average /= scanAmount
+    sensor1Average = sum1 / scanAmount
+    sensor2Average = sum2 / scanAmount
+    sensor3Average = sum3 / scanAmount
 
     print("Sensor1:")
     print(sensor1Average)
@@ -105,27 +96,37 @@ def update():
 def gpio_zuordnung(led_nr):
     if led_nr == 1:
         GPIO.output(25, True)
+        print('led activated: ', led_nr)
     elif led_nr == 2:
         GPIO.output(24, True)
+        print('led activated: ', led_nr)
     elif led_nr == 3:
         GPIO.output(23, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 4:
         GPIO.output(22, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 5:
         GPIO.output(21, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 6:
         GPIO.output(29, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 7:
         GPIO.output(28, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 8:
         GPIO.output(27, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 9:
         GPIO.output(26, True)
-    elif led_nr == 2:
+        print('led activated: ', led_nr)
+    elif led_nr == 10:
         GPIO.output(6, True)
+        print('led activated: ', led_nr)
     else:
         print('something went wrong')
-    print('led activated: ', led_nr)
+
 
 
 # Connection to LEDs
