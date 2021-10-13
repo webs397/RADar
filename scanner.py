@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 print('set to BOARD')
-LEDs = [37,35,33,31,29,40,38,36,32,22]
+LEDs = [25,24,23,22,21,29,28,27,26,6]
 GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
 GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
 GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
