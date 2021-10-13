@@ -130,7 +130,6 @@ def gpio_zuordnung(led_nr):
     else:
         print('something went wrong')
 
-
 # Connection to LEDs
 def gpio_control():
     global led
