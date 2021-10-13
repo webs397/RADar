@@ -12,7 +12,7 @@ config_fucker.print_config()
 time.sleep(25)
 context = zmq.Context()
 socket = context.socket(zmq.REQ)
-socket.connetct("tcp://localhost:5555")
+socket.connect("tcp://localhost:5555")
 
 package = {'reason':'demand'}
 
