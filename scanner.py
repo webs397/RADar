@@ -31,7 +31,7 @@ def scan(scanAmount):
     sensor2Average = 0
     sensor3Average = 0
 
-    for x in scanAmount:
+    for x in range(scanAmount):
         sensor1Average += distances[0][x]
         sensor2Average += distances[1][x]
         sensor3Average += distances[2][x]
