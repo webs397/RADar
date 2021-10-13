@@ -1,5 +1,5 @@
 import json
-import pycamera
+import picamera
 import os
 import io
 
