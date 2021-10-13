@@ -142,13 +142,14 @@ def main():
             scan(5)
             update()
             time.sleep(1)
-        finally:
+        except KeyboardInterrupt:
             GPIO.cleanup()
-            print('im gone')
+        except:
+            print('some error')
 
 if __name__ == "__main__":
     GPIO.setmode(GPIO.BCM)
-    print('set to BCM')
+    print('set to bcm')
     LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]
     GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
     GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
