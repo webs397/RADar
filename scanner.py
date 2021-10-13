@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 
 def scan(scanAmount):
-    distances = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+    distances = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
     for x in range(scanAmount):
         # Read all Sensor distance values
         # sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
