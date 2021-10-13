@@ -11,7 +11,20 @@ GPIO.setup(29, GPIO.OUT)  # this is pin 40
 GPIO.setup(28, GPIO.OUT)  # this is pin 38
 GPIO.setup(27, GPIO.OUT)  # this is pin 36
 GPIO.setup(26, GPIO.OUT)  # this is pin 32
-GPIO.setup(6, GPIO.OUT)   # this is pin 22
+GPIO.setup(6, GPIO.OUT)  # this is pin 22
+
+GPIO.output(25, False),  # this is pin 37
+GPIO.output(24, False),  # this is pin 35
+GPIO.output(23, False),  # this is pin 33
+GPIO.output(22, False),  # this is pin 31
+GPIO.output(21, False),  # this is pin 29
+GPIO.output(29, False),  # this is pin 40
+GPIO.output(28, False),  # this is pin 38
+GPIO.output(27, False),  # this is pin 36
+GPIO.output(26, False),  # this is pin 32
+GPIO.output(6, False),  # this is pin 22
+
+oldled = 0
 
 
 def scan(scanAmount):
@@ -72,15 +85,28 @@ def update(sensor1Average, sensor2Average, sensor3Average):
         if sensor2Average == 0:
             led = sensor3Average
 
-    gpio_control(led)
+    gpio_control(led, oldled)
     return None
 
 
 # Connection to LEDs
-def gpio_control(led):
+def gpio_control(led, oldled):
+    if not led == oldled:
+        GPIO.output(25, False),  # this is pin 37
+        GPIO.output(24, False),  # this is pin 35
+        GPIO.output(23, False),  # this is pin 33
+        GPIO.output(22, False),  # this is pin 31
+        GPIO.output(21, False),  # this is pin 29
+        GPIO.output(29, False),  # this is pin 40
+        GPIO.output(28, False),  # this is pin 38
+        GPIO.output(27, False),  # this is pin 36
+        GPIO.output(26, False),  # this is pin 32
+        GPIO.output(6, False),  # this is pin 22
+        oldled = led
+
     switcher = \
-        {
-            # 1: GPIO.output(25, True),  # this is pin 37
+        {  # this for some reason activates 1,5,7,10 (should just be 5)
+            1: GPIO.output(25, True),
             2: GPIO.output(24, True),  # this is pin 35
             3: GPIO.output(23, True),  # this is pin 33
             4: GPIO.output(22, True),  # this is pin 31
