@@ -15,7 +15,7 @@ class CamConfigHandler:
         self.get_config()
 
     def get_config(self):
-        with open('config.json','r') as config_file:
+        with open('/home/pi/RADar/camera/config.json','r') as config_file:
             data = json.load(config_file)
             self.data = data
             self.resolution = (data['res_width'], data['res_height'])
@@ -27,7 +27,7 @@ class CamConfigHandler:
 
     def put_config(self, vid_counter):
         self.data['video_counter'] = vid_counter
-        with open('config.json','w') as config_file:
+        with open('/home/pi/RADar/camera/config.json','w') as config_file:
             json.dump(self.data, config_file, indent = 4)
 
     def print_config(self):
