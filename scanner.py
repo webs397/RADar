@@ -91,6 +91,32 @@ def update(sensor1Average, sensor2Average, sensor3Average):
     return None
 
 
+def gpio_zuordnung(led_nr):
+    if led_nr == 1:
+        GPIO.output(25, True)
+    elif led_nr == 2:
+        GPIO.output(24, True)
+    elif led_nr == 3:
+        GPIO.output(23, True)
+    elif led_nr == 2:
+        GPIO.output(22, True)
+    elif led_nr == 2:
+        GPIO.output(21, True)
+    elif led_nr == 2:
+        GPIO.output(29, True)
+    elif led_nr == 2:
+        GPIO.output(28, True)
+    elif led_nr == 2:
+        GPIO.output(27, True)
+    elif led_nr == 2:
+        GPIO.output(26, True)
+    elif led_nr == 2:
+        GPIO.output(6, True)
+    else:
+        print('something went wrong')
+    print('led activated: ', led_nr)
+
+
 # Connection to LEDs
 def gpio_control():
     global led
@@ -109,7 +135,9 @@ def gpio_control():
         GPIO.output(26, False),  # this is pin 32
         GPIO.output(6, False),  # this is pin 22
         oldled = led
+    gpio_zuordnung(led)
 
+'''
     switcher = \
         {  # this for some reason activates 1,5,7,10 (should just be 5)
             1: GPIO.output(25, True),
@@ -124,7 +152,7 @@ def gpio_control():
             10: GPIO.output(6, True),  # this is pin 22
         }
 
-    switcher[led]()
+    switcher[led]()'''
 
 
 while True:
