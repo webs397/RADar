@@ -34,9 +34,9 @@ def scan(scanAmount):
     sensor3Average = 0
 
     for x in range(scanAmount):
-        sensor1Average += distances[0][x]
-        sensor2Average += distances[1][x]
-        sensor3Average += distances[2][x]
+        sensor1Average += distances[0][x-1]
+        sensor2Average += distances[1][x-1]
+        sensor3Average += distances[2][x-1]
 
     sensor1Average /= scanAmount
     sensor2Average /= scanAmount
@@ -49,7 +49,7 @@ def scan(scanAmount):
     print("Sensor3:")
     print(sensor3Average)
 
-    return sensor1Average, sensor2Average, sensor3Average
+    return (sensor1Average,sensor2Average, sensor3Average)
 
 
 # Update LEDs for Sensor values
