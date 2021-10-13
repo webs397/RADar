@@ -61,7 +61,7 @@ def update(sensor1Average, sensor2Average, sensor3Average):
         if sensor2Average == 0:
             led = sensor3Average
 
-    gpio_control()
+    gpio_control(led)
     return None
 
 
