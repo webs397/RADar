@@ -39,12 +39,10 @@ class Dashcam:
         # camera instances and configuration
         self.camera = picamera.PiCamera()
         self.stream = picamera.PiCameraCircularIO(self.camera, seconds = 20)
-        self.camera.resolution = None
-        self.camera.framrate = None
         # using the configuration values
         self.config_handler = CamConfigHandler()
-        self.camera.resolution = self.config_handler.resolution
-        self.camera.framerate = self.config_handler.framerate
+        #self.camera.resolution = self.config_handler.resolution
+        #self.camera.framerate = self.config_handler.framerate
         self.vid_counter = self.config_handler.vid_counter
         self.danger_counter = self.config_handler.danger_counter
         # configuring folder structure
