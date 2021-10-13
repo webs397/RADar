@@ -3,7 +3,7 @@
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 print('set to BOARD')
 LEDs = [37,35,33,31,29,40,38,36,32,22]
 GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
@@ -14,7 +14,7 @@ GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
 GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
 GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
 GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
-GPIO.setup(32, GPIO.OUT)  # this is pin 32
+GPIO.setup(26, GPIO.OUT)  # this is pin 32
 GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
 
 GPIO.output(LEDs[0], False),  # this is pin 37
@@ -25,7 +25,7 @@ GPIO.output(LEDs[4], False),  # this is pin 29
 GPIO.output(LEDs[5], False),  # this is pin 40
 GPIO.output(LEDs[6], False),  # this is pin 38
 GPIO.output(LEDs[7], False),  # this is pin 36
-GPIO.output(32, False),  # this is pin 32
+GPIO.output(26, False),  # this is pin 32
 GPIO.output(LEDs[9], False),  # this is pin 22
 
 oldled = 0
@@ -123,7 +123,7 @@ def gpio_zuordnung(led_nr):
         GPIO.output(LEDs[7], True)
         print('led activated: ', led_nr)
     elif led_nr == 9:
-        GPIO.output(32, True)
+        GPIO.output(26, True)
         print('led activated: ', led_nr)
     elif led_nr == 10:
         GPIO.output(LEDs[9], True)
