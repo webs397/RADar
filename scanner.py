@@ -36,7 +36,7 @@ def scan(scanAmount):
     for x in range(scanAmount):
         # Read all Sensor distance values
         # sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
-        sensor1 = 5
+        sensor1 = 2
         # sensor2 = ultrasonic.distance(ultrasonic.Trigger2, ultrasonic.Echo2)
         sensor2 = 1
         # sensor3 = tof.tofsensor.readDistance()
