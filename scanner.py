@@ -3,38 +3,6 @@
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
-print('set to BOARD')
-LEDs = [25,24,23,22,21,29,28,27,26,6]
-GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
-GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
-GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
-GPIO.setup(LEDs[3], GPIO.OUT)  # this is pin 31
-GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
-GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
-GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
-GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
-GPIO.setup(26, GPIO.OUT)  # this is pin 32
-GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
-
-GPIO.output(LEDs[0], False),  # this is pin 37
-GPIO.output(LEDs[1], False),  # this is pin 35
-GPIO.output(LEDs[2], False),  # this is pin 33
-GPIO.output(LEDs[3], False),  # this is pin 31
-GPIO.output(LEDs[4], False),  # this is pin 29
-GPIO.output(LEDs[5], False),  # this is pin 40
-GPIO.output(LEDs[6], False),  # this is pin 38
-GPIO.output(LEDs[7], False),  # this is pin 36
-GPIO.output(26, False),  # this is pin 32
-GPIO.output(LEDs[9], False),  # this is pin 22
-
-oldled = 0
-led = 0
-sensor1Average = 0
-sensor2Average = 0
-sensor3Average = 0
-
-
 def scan(scanAmount):
     sum1 = 0
     sum2 = 0
@@ -168,14 +136,47 @@ def gpio_control():
 
     switcher[led]()'''
 
+def main():
+    while True:
+        try:
+            scan(5)
+            update()
+            time.sleep(1)
+        except KeyboardInterrupt:
+            GPIO.cleanup()
+        finally:
+            GPIO.cleanup()
+            print('im gone')
 
-while True:
-    try:
-        scan(5)
-        update()
-        time.sleep(1)
-    except KeyboardInterrupt:
-        GPIO.cleanup()
-    finally:
-        GPIO.cleanup()
-        print('im gone')
+if __name__ == "__main__":
+    GPIO.setmode(GPIO.BCM)
+    print('set to BOARD')
+    LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]
+    GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
+    GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
+    GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
+    GPIO.setup(LEDs[3], GPIO.OUT)  # this is pin 31
+    GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
+    GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
+    GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
+    GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
+    GPIO.setup(26, GPIO.OUT)  # this is pin 32
+    GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
+
+    GPIO.output(LEDs[0], False),  # this is pin 37
+    GPIO.output(LEDs[1], False),  # this is pin 35
+    GPIO.output(LEDs[2], False),  # this is pin 33
+    GPIO.output(LEDs[3], False),  # this is pin 31
+    GPIO.output(LEDs[4], False),  # this is pin 29
+    GPIO.output(LEDs[5], False),  # this is pin 40
+    GPIO.output(LEDs[6], False),  # this is pin 38
+    GPIO.output(LEDs[7], False),  # this is pin 36
+    GPIO.output(26, False),  # this is pin 32
+    GPIO.output(LEDs[9], False),  # this is pin 22
+
+    oldled = 0
+    led = 0
+    sensor1Average = 0
+    sensor2Average = 0
+    sensor3Average = 0
+    main()
