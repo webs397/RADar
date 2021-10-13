@@ -3,6 +3,8 @@ import ultrasonic
 import time
 import RPi.GPIO as GPIO
 
+GPIO.setmode(GPIO.BOARD)
+
 GPIO.setup(25, GPIO.OUT)  # this is pin 37
 GPIO.setup(24, GPIO.OUT)  # this is pin 35
 GPIO.setup(23, GPIO.OUT)  # this is pin 33
