@@ -166,6 +166,8 @@ class TFminiI2C:
         self._setRegister(self.RegDistUnit, self.RangeUnit)
         return
 
+
+tofsensor = TFminiI2C(1, 0x10)
 """
 Example usage:
 
