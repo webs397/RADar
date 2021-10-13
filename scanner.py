@@ -4,6 +4,7 @@ import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
+print('set to BOARD')
 LEDs = [37,35,33,31,29,40,38,36,32,22]
 GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
 GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
