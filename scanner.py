@@ -1,5 +1,5 @@
-import tof
-import ultrasonic
+#import tof
+#import ultrasonic
 import time
 import RPi.GPIO as GPIO
 LEDs = [37,35,33,31,29,40,38,36,32,22]
