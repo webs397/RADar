@@ -1,5 +1,6 @@
 import tof
 import ultrasonic
+import RPi.GPIO as GPIO
 
 
 def scan(scanAmount):
@@ -45,14 +46,34 @@ def scan(scanAmount):
 # Update LEDs for Sensor values
 def update(sensor1Average, sensor2Average, sensor3Average):
     # LED is the value for which LED pin to trigger
-    LED = sensor1Average
+    led = sensor1Average
     if sensor1Average == 0:
-        LED = sensor2Average
+        led = sensor2Average
         if sensor2Average == 0:
-            LED = sensor3Average
+            led = sensor3Average
 
-    # Interface with LEDs needs to go here (Philipp)
-
+    gpio_control()
     return None
 
+
+# Connection to LEDs
+def gpio_control(led):
+    switcher = \
+        {
+            1: GPIO.output(25, True),  # this is pin 37
+            2: GPIO.output(24, True),  # this is pin 35
+            3: GPIO.output(23, True),  # this is pin 33
+            4: GPIO.output(22, True),  # this is pin 31
+            5: GPIO.output(21, True),  # this is pin 29
+            6: GPIO.output(29, True),  # this is pin 40
+            7: GPIO.output(28, True),  # this is pin 38
+            8: GPIO.output(27, True),  # this is pin 36
+            9: GPIO.output(26, True),  # this is pin 32
+            10: GPIO.output(6, True),  # this is pin 22
+        }
+
+    return switcher.get(led, "nothing")
+
+
+update(scan(5))
 
