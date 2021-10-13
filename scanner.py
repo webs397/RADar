@@ -3,7 +3,7 @@
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 LEDs = [37,35,33,31,29,40,38,36,32,22]
 GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
 GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
@@ -131,7 +131,6 @@ def gpio_zuordnung(led_nr):
         print('something went wrong')
 
 
-
 # Connection to LEDs
 def gpio_control():
     global led
@@ -177,3 +176,6 @@ while True:
         time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()
+    finally:
+        GPIO.cleanup()
+        print('im gone')
