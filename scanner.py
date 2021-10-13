@@ -36,18 +36,20 @@ def scan(scanAmount):
     for x in range(scanAmount):
         # Read all Sensor distance values
         # sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
-        sensor1 = 2
+        sensor1 = 3
         # sensor2 = ultrasonic.distance(ultrasonic.Trigger2, ultrasonic.Echo2)
-        sensor2 = 1
+        sensor2 = 4
         # sensor3 = tof.tofsensor.readDistance()
-        sensor3 = 1
+        sensor3 = 8
         # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
+        '''
         if sensor1 >= 2:
             sensor1 = 0
         if sensor2 > 6:
             sensor2 = 0
         if sensor3 > 10:
             sensor3 = 0
+        '''
         # Collect Values in sensor array
         distances[0][x - 1] = sensor1
         distances[1][x - 1] = sensor2
