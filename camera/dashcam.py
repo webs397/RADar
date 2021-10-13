@@ -31,10 +31,7 @@ class CamConfigHandler:
             json.dump(self.data, config_file, indent = 4)
 
     def print_config(self):
-        print(self.resolution)
-        print(self.framerate)
-        print(self.length)
-        print(self.vid_counter)
+        print(self.data)
 
 
 class Dashcam:
