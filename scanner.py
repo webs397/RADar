@@ -2,6 +2,17 @@ import tof
 import ultrasonic
 import RPi.GPIO as GPIO
 
+GPIO.setup(25, GPIO.OUT)  # this is pin 37
+GPIO.setup(24, GPIO.OUT)  # this is pin 35
+GPIO.setup(23, GPIO.OUT)  # this is pin 33
+GPIO.setup(22, GPIO.OUT)  # this is pin 31
+GPIO.setup(21, GPIO.OUT)  # this is pin 29
+GPIO.setup(29, GPIO.OUT)  # this is pin 40
+GPIO.setup(28, GPIO.OUT)  # this is pin 38
+GPIO.setup(27, GPIO.OUT)  # this is pin 36
+GPIO.setup(26, GPIO.OUT)  # this is pin 32
+GPIO.setup(6, GPIO.OUT)   # this is pin 22
+
 
 def scan(scanAmount):
     distances = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
