@@ -93,7 +93,7 @@ def update(sensor1Average, sensor2Average, sensor3Average):
 def gpio_control(led, oldled):
     print("led and old led")
     print(led, oldled)
-    if not led == oldled:
+    if led != oldled:
         GPIO.output(25, False),  # this is pin 37
         GPIO.output(24, False),  # this is pin 35
         GPIO.output(23, False),  # this is pin 33
