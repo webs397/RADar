@@ -25,7 +25,7 @@ GPIO.output(26, False),  # this is pin 32
 GPIO.output(6, False),  # this is pin 22
 
 oldled = 0
-
+led = 0
 
 def scan(scanAmount):
     distances = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
@@ -79,18 +79,22 @@ def scan(scanAmount):
 # Update LEDs for Sensor values
 def update(sensor1Average, sensor2Average, sensor3Average):
     # LED is the value for which LED pin to trigger
+    global led
+    global oldled
     led = sensor1Average
     if sensor1Average == 0:
         led = sensor2Average
         if sensor2Average == 0:
             led = sensor3Average
 
-    gpio_control(led, oldled)
+    gpio_control()
     return None
 
 
 # Connection to LEDs
-def gpio_control(led, oldled):
+def gpio_control():
+    global led
+    global oldled
     print("led and old led")
     print(led, oldled)
     if led != oldled:
@@ -120,7 +124,7 @@ def gpio_control(led, oldled):
             10: GPIO.output(6, True),  # this is pin 22
         }
 
-    return switcher.get(led, "nothing")
+    switcher[led]()
 
 
 while True:
