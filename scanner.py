@@ -2,6 +2,7 @@ import tof
 import ultrasonic
 import RPi.GPIO as GPIO
 
+tofsensor = TFminiI2C(1, 0x10)
 
 def scan(scanAmount):
     distances = [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]
