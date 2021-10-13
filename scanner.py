@@ -91,6 +91,8 @@ def update(sensor1Average, sensor2Average, sensor3Average):
 
 # Connection to LEDs
 def gpio_control(led, oldled):
+    print("led and old led")
+    print(led, oldled)
     if not led == oldled:
         GPIO.output(25, False),  # this is pin 37
         GPIO.output(24, False),  # this is pin 35
