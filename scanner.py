@@ -83,5 +83,5 @@ def gpio_control(led):
     return switcher.get(led, "nothing")
 
 
-update(scan(5))
+update(scan(1))
 
