@@ -2,30 +2,28 @@ import tof
 import ultrasonic
 import time
 import RPi.GPIO as GPIO
+LEDs = [37,35,33,31,29,40,38,36,32,22]
+GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
+GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
+GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
+GPIO.setup(LEDs[3], GPIO.OUT)  # this is pin 31
+GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
+GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
+GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
+GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
+GPIO.setup(LEDs[8], GPIO.OUT)  # this is pin 32
+GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
 
-GPIO.setmode(GPIO.BOARD)
-
-GPIO.setup(25, GPIO.OUT)  # this is pin 37
-GPIO.setup(24, GPIO.OUT)  # this is pin 35
-GPIO.setup(23, GPIO.OUT)  # this is pin 33
-GPIO.setup(22, GPIO.OUT)  # this is pin 31
-GPIO.setup(21, GPIO.OUT)  # this is pin 29
-GPIO.setup(29, GPIO.OUT)  # this is pin 40
-GPIO.setup(28, GPIO.OUT)  # this is pin 38
-GPIO.setup(27, GPIO.OUT)  # this is pin 36
-GPIO.setup(26, GPIO.OUT)  # this is pin 32
-GPIO.setup(6, GPIO.OUT)  # this is pin 22
-
-GPIO.output(25, False),  # this is pin 37
-GPIO.output(24, False),  # this is pin 35
-GPIO.output(23, False),  # this is pin 33
-GPIO.output(22, False),  # this is pin 31
-GPIO.output(21, False),  # this is pin 29
-GPIO.output(29, False),  # this is pin 40
-GPIO.output(28, False),  # this is pin 38
-GPIO.output(27, False),  # this is pin 36
-GPIO.output(26, False),  # this is pin 32
-GPIO.output(6, False),  # this is pin 22
+GPIO.output(LEDs[0], False),  # this is pin 37
+GPIO.output(LEDs[1], False),  # this is pin 35
+GPIO.output(LEDs[2], False),  # this is pin 33
+GPIO.output(LEDs[3], False),  # this is pin 31
+GPIO.output(LEDs[4], False),  # this is pin 29
+GPIO.output(LEDs[5], False),  # this is pin 40
+GPIO.output(LEDs[6], False),  # this is pin 38
+GPIO.output(LEDs[7], False),  # this is pin 36
+GPIO.output(LEDs[8], False),  # this is pin 32
+GPIO.output(LEDs[9], False),  # this is pin 22
 
 oldled = 0
 led = 0
@@ -97,34 +95,34 @@ def update():
 
 def gpio_zuordnung(led_nr):
     if led_nr == 1:
-        GPIO.output(25, True)
+        GPIO.output(LEDs[0], True)
         print('led activated: ', led_nr)
     elif led_nr == 2:
-        GPIO.output(24, True)
+        GPIO.output(LEDs[1], True)
         print('led activated: ', led_nr)
     elif led_nr == 3:
-        GPIO.output(23, True)
+        GPIO.output(LEDs[2], True)
         print('led activated: ', led_nr)
     elif led_nr == 4:
-        GPIO.output(22, True)
+        GPIO.output(LEDs[3], True)
         print('led activated: ', led_nr)
     elif led_nr == 5:
-        GPIO.output(21, True)
+        GPIO.output(LEDs[4], True)
         print('led activated: ', led_nr)
     elif led_nr == 6:
-        GPIO.output(29, True)
+        GPIO.output(LEDs[5], True)
         print('led activated: ', led_nr)
     elif led_nr == 7:
-        GPIO.output(28, True)
+        GPIO.output(LEDs[6], True)
         print('led activated: ', led_nr)
     elif led_nr == 8:
-        GPIO.output(27, True)
+        GPIO.output(LEDs[7], True)
         print('led activated: ', led_nr)
     elif led_nr == 9:
-        GPIO.output(26, True)
+        GPIO.output(LEDs[8], True)
         print('led activated: ', led_nr)
     elif led_nr == 10:
-        GPIO.output(6, True)
+        GPIO.output(LEDs[9], True)
         print('led activated: ', led_nr)
     else:
         print('something went wrong')
@@ -138,16 +136,16 @@ def gpio_control():
     print("led and old led")
     print(led, oldled)
     if led != oldled:
-        GPIO.output(25, False),  # this is pin 37
-        GPIO.output(24, False),  # this is pin 35
-        GPIO.output(23, False),  # this is pin 33
-        GPIO.output(22, False),  # this is pin 31
-        GPIO.output(21, False),  # this is pin 29
-        GPIO.output(29, False),  # this is pin 40
-        GPIO.output(28, False),  # this is pin 38
-        GPIO.output(27, False),  # this is pin 36
-        GPIO.output(26, False),  # this is pin 32
-        GPIO.output(6, False),  # this is pin 22
+        GPIO.output(LEDs[0], False),  # this is pin 37
+        GPIO.output(LEDs[1], False),  # this is pin 35
+        GPIO.output(LEDs[2], False),  # this is pin 33
+        GPIO.output(LEDs[3], False),  # this is pin 31
+        GPIO.output(LEDs[4], False),  # this is pin 29
+        GPIO.output(LEDs[5], False),  # this is pin 40
+        GPIO.output(LEDs[6], False),  # this is pin 38
+        GPIO.output(LEDs[7], False),  # this is pin 36
+        GPIO.output(LEDs[8], False),  # this is pin 32
+        GPIO.output(LEDs[9], False),  # this is pin 22
         oldled = led
     gpio_zuordnung(led)
 
