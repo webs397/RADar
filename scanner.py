@@ -18,7 +18,7 @@ def scan(scanAmount):
         sensor3 = 9
         # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
 
-        # Collect Values in sensor array
+        # Collect Values
         sum1 += sensor1
         sum2 += sensor2
         sum3 += sensor3
@@ -28,6 +28,7 @@ def scan(scanAmount):
     global sensor2Average
     global sensor3Average
 
+    # Build average of Sensor measurements
     sensor1Average = sum1 / scanAmount
     sensor2Average = sum2 / scanAmount
     sensor3Average = sum3 / scanAmount
@@ -62,7 +63,6 @@ def update():
         led = 0
 
     gpio_control()
-    return None
 
 
 def gpio_zuordnung(led_nr):
