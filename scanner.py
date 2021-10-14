@@ -153,16 +153,12 @@ sensor1Average = 0
 sensor2Average = 0
 sensor3Average = 0
 
-while True:
-    try:
+
+try:
+    while True:
         scan(5)
         update()
         time.sleep(5)  # it only passes over this once then gets stuck in a loop scan to gpio control and then some error
         print("Cycle done!!!!!!!!!!!!!")
-    except KeyboardInterrupt:
-        GPIO.cleanup()
-    except:
-        print('some error')
-
-    finally:
-        GPIO.cleanup()
+finally:
+    GPIO.cleanup()
