@@ -25,11 +25,12 @@ camera_instance = Dashcam()
 ```
 
 To create a client communicating with the camera, this is the code you'll have to use:  
-```import zmq
+```
+import zmq
 
 context = zmq.Context()
-socket = context.socket(zmq.REQ)
-socket.connect("tcp://localhost:5555")
+socket = context.socket(zmq.REQ)        #telling it, that it's a client (REQUEST)
+socket.connect("tcp://localhost:5555")  #connecting the socket
 
 package = {'reason':'demand'}           #the reason can be either 'demand' or 'danger'
 print("sending request")
