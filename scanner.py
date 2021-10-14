@@ -91,7 +91,7 @@ def gpio_zuordnung(led_nr):
         GPIO.output(LEDs[7], True)
         print('led activated: ', led_nr)
     elif led_nr == 9:
-        GPIO.output(26, True)
+        GPIO.output(LEDs[8], True)
         print('led activated: ', led_nr)
     elif led_nr == 10:
         GPIO.output(LEDs[9], True)
@@ -119,22 +119,6 @@ def gpio_control():
         oldled = led
     gpio_zuordnung(led)
 
-'''
-    switcher = \
-        {  # this for some reason activates 1,5,7,10 (should just be 5)
-            1: GPIO.output(25, True),
-            2: GPIO.output(24, True),  # this is pin 35
-            3: GPIO.output(23, True),  # this is pin 33
-            4: GPIO.output(22, True),  # this is pin 31
-            5: GPIO.output(21, True),  # this is pin 29
-            6: GPIO.output(29, True),  # this is pin 40
-            7: GPIO.output(28, True),  # this is pin 38
-            8: GPIO.output(27, True),  # this is pin 36
-            9: GPIO.output(26, True),  # this is pin 32
-            10: GPIO.output(6, True),  # this is pin 22
-        }
-
-    switcher[led]()'''
 
 def main():
     while True:
@@ -150,7 +134,8 @@ def main():
 if __name__ == "__main__":
     GPIO.setmode(GPIO.BCM)
     print('set to bcm')
-    LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]
+    LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6] # LED pin layout for GPIO
+#   LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
     GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
     GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
     GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
@@ -159,7 +144,7 @@ if __name__ == "__main__":
     GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
     GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
     GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
-    GPIO.setup(26, GPIO.OUT)  # this is pin 32
+    GPIO.setup(LEDs[8], GPIO.OUT)  # this is pin 32
     GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
 
     GPIO.output(LEDs[0], False),  # this is pin 37
@@ -170,7 +155,7 @@ if __name__ == "__main__":
     GPIO.output(LEDs[5], False),  # this is pin 40
     GPIO.output(LEDs[6], False),  # this is pin 38
     GPIO.output(LEDs[7], False),  # this is pin 36
-    GPIO.output(26, False),  # this is pin 32
+    GPIO.output(LEDs[8], False),  # this is pin 32
     GPIO.output(LEDs[9], False),  # this is pin 22
 
     oldled = 0
