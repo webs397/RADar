@@ -53,14 +53,13 @@ def update():
     global sensor2Average
     global sensor3Average
 
-    led = int(round(sensor1Average))
     # Sensor Cutoffs
     if sensor1Average <= 2:
-        led = sensor1Average
+        led = int(round(sensor1Average))
     elif sensor2Average <= 6:
-        led = sensor2Average
+        led = int(round(sensor2Average))
     elif sensor3Average <= 10:
-        led = sensor3Average
+        led = int(round(sensor3Average))
     else:
         led = 0
 
