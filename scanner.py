@@ -11,7 +11,7 @@ def scan(scanAmount):
     for x in range(scanAmount):
         # Read all Sensor distance values
         # sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
-        sensor1 = 3
+        sensor1 = 2
         # sensor2 = ultrasonic.distance(ultrasonic.Trigger2, ultrasonic.Echo2)
         sensor2 = 4
         # sensor3 = tof.tofsensor.readDistance()
@@ -158,7 +158,7 @@ try:
     while True:
         scan(5)
         update()
-        time.sleep(5)  # it only passes over this once then gets stuck in a loop scan to gpio control and then some error
+        time.sleep(5)
         print("Cycle done!!!!!!!!!!!!!")
 finally:
     GPIO.cleanup()
