@@ -3,38 +3,6 @@
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
-print('set to bcm')
-LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]  # LED pin layout for GPIO
-#   LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
-GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
-GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
-GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
-GPIO.setup(LEDs[3], GPIO.OUT)  # this is pin 31
-GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
-GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
-GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
-GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
-GPIO.setup(LEDs[8], GPIO.OUT)  # this is pin 32
-GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
-
-GPIO.output(LEDs[0], False),  # this is pin 37
-GPIO.output(LEDs[1], False),  # this is pin 35
-GPIO.output(LEDs[2], False),  # this is pin 33
-GPIO.output(LEDs[3], False),  # this is pin 31
-GPIO.output(LEDs[4], False),  # this is pin 29
-GPIO.output(LEDs[5], False),  # this is pin 40
-GPIO.output(LEDs[6], False),  # this is pin 38
-GPIO.output(LEDs[7], False),  # this is pin 36
-GPIO.output(LEDs[8], False),  # this is pin 32
-GPIO.output(LEDs[9], False),  # this is pin 22
-
-oldled = 0
-led = 0
-sensor1Average = 0
-sensor2Average = 0
-sensor3Average = 0
-
 
 def scan(scanAmount):
     sum1 = 0
@@ -140,25 +108,56 @@ def gpio_control():
     print("led and old led")
     print(led, oldled)
     if led != oldled:
-        GPIO.output(LEDs[0], False),  # this is pin 37
-        GPIO.output(LEDs[1], False),  # this is pin 35
-        GPIO.output(LEDs[2], False),  # this is pin 33
-        GPIO.output(LEDs[3], False),  # this is pin 31
-        GPIO.output(LEDs[4], False),  # this is pin 29
-        GPIO.output(LEDs[5], False),  # this is pin 40
-        GPIO.output(LEDs[6], False),  # this is pin 38
-        GPIO.output(LEDs[7], False),  # this is pin 36
-        GPIO.output(LEDs[8], False),  # this is pin 32
-        GPIO.output(LEDs[9], False),  # this is pin 22
+        turn_leds_off()
         oldled = led
     gpio_zuordnung(led)
 
+
+def turn_leds_off():
+    GPIO.output(LEDs[0], False),  # this is pin 37
+    GPIO.output(LEDs[1], False),  # this is pin 35
+    GPIO.output(LEDs[2], False),  # this is pin 33
+    GPIO.output(LEDs[3], False),  # this is pin 31
+    GPIO.output(LEDs[4], False),  # this is pin 29
+    GPIO.output(LEDs[5], False),  # this is pin 40
+    GPIO.output(LEDs[6], False),  # this is pin 38
+    GPIO.output(LEDs[7], False),  # this is pin 36
+    GPIO.output(LEDs[8], False),  # this is pin 32
+    GPIO.output(LEDs[9], False),  # this is pin 22
+
+
+def led_setup():
+    GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
+    GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
+    GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
+    GPIO.setup(LEDs[3], GPIO.OUT)  # this is pin 31
+    GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
+    GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
+    GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
+    GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
+    GPIO.setup(LEDs[8], GPIO.OUT)  # this is pin 32
+    GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
+
+
+# SETUP
+GPIO.setmode(GPIO.BCM)
+print('set to bcm')
+LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]  # LED pin layout for GPIO
+#   LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
+led_setup()
+turn_leds_off()
+
+oldled = 0
+led = 0
+sensor1Average = 0
+sensor2Average = 0
+sensor3Average = 0
 
 while True:
     try:
         scan(5)
         update()
-        time.sleep(10)
+        time.sleep(5)  # it only passes over this once then gets stuck in a loop scan to gpio control and then some error
         print("Cycle done!!!!!!!!!!!!!")
     except KeyboardInterrupt:
         GPIO.cleanup()
