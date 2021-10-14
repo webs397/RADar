@@ -2,6 +2,7 @@
 # import ultrasonic
 import time
 import RPi.GPIO as GPIO
+from gpiozero import LED
 
 
 def scan(scanAmount):
@@ -68,34 +69,34 @@ def update():
 def gpio_zuordnung(led_nr):
     global LEDs
     if led_nr == 1:
-        GPIO.output(LEDs[0], True)
+        LEDs[0].on()
         print('led activated: ', led_nr)
     elif led_nr == 2:
-        GPIO.output(LEDs[1], False)
+        LEDs[1].on()
         print('led activated: ', led_nr)
     elif led_nr == 3:
-        GPIO.output(LEDs[2], True)
+        LEDs[2].on()
         print('led activated: ', led_nr)
     elif led_nr == 4:
-        GPIO.output(LEDs[3], True)
+        LEDs[3].on()
         print('led activated: ', led_nr)
     elif led_nr == 5:
-        GPIO.output(LEDs[4], True)
+        LEDs[4].on()
         print('led activated: ', led_nr)
     elif led_nr == 6:
-        GPIO.output(LEDs[5], True)
+        LEDs[5].on()
         print('led activated: ', led_nr)
     elif led_nr == 7:
-        GPIO.output(LEDs[6], True)
+        LEDs[6].on()
         print('led activated: ', led_nr)
     elif led_nr == 8:
-        GPIO.output(LEDs[7], True)
+        LEDs[7].on()
         print('led activated: ', led_nr)
     elif led_nr == 9:
-        GPIO.output(LEDs[8], True)
+        LEDs[8].on()
         print('led activated: ', led_nr)
     elif led_nr == 10:
-        GPIO.output(LEDs[9], True)
+        LEDs[9].on()
         print('led activated: ', led_nr)
     else:
         print('something went wrong')
@@ -114,37 +115,26 @@ def gpio_control():
 
 
 def turn_leds_off():
-    GPIO.output(LEDs[0], False),  # this is pin 37
-    GPIO.output(LEDs[1], False),  # this is pin 35
-    GPIO.output(LEDs[2], False),  # this is pin 33
-    GPIO.output(LEDs[3], False),  # this is pin 31
-    GPIO.output(LEDs[4], False),  # this is pin 29
-    GPIO.output(LEDs[5], False),  # this is pin 40
-    GPIO.output(LEDs[6], False),  # this is pin 38
-    GPIO.output(LEDs[7], False),  # this is pin 36
-    GPIO.output(LEDs[8], False),  # this is pin 32
-    GPIO.output(LEDs[9], False),  # this is pin 22
+    LEDs[0].off()
+    LEDs[1].off()
+    LEDs[2].off()
+    LEDs[3].off()
+    LEDs[4].off()
+    LEDs[5].off()
+    LEDs[6].off()
+    LEDs[7].off()
+    LEDs[8].off()
+    LEDs[9].off()
 
 
-def led_setup():
-    GPIO.setup(LEDs[0], GPIO.OUT)  # this is pin 37
-    GPIO.setup(LEDs[1], GPIO.OUT)  # this is pin 35
-    GPIO.setup(LEDs[2], GPIO.OUT)  # this is pin 33
-    GPIO.setup(LEDs[3], GPIO.OUT)  # this is pin 31
-    GPIO.setup(LEDs[4], GPIO.OUT)  # this is pin 29
-    GPIO.setup(LEDs[5], GPIO.OUT)  # this is pin 40
-    GPIO.setup(LEDs[6], GPIO.OUT)  # this is pin 38
-    GPIO.setup(LEDs[7], GPIO.OUT)  # this is pin 36
-    GPIO.setup(LEDs[8], GPIO.OUT)  # this is pin 32
-    GPIO.setup(LEDs[9], GPIO.OUT)  # this is pin 22
 
 
 # SETUP
-GPIO.setmode(GPIO.BCM)
-print('set to bcm')
-LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]  # LED pin layout for GPIO
-#   LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
-led_setup()
+GPIO.setmode(GPIO.BOARD)
+print('set to Board')
+# LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]  # LED pin layout for GPIO
+# LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
+LEDs = [LED(37), LED(35), LED(33), LED(31), LED(29), LED(40), LED(38), LED(36), LED(32), LED(22)] # LED pin layout for Board and new LED library
 turn_leds_off()
 
 oldled = 0
