@@ -15,7 +15,7 @@ def scan(scanAmount):
         sensor1 = 3
         # sensor2 = ultrasonic.distance(ultrasonic.Trigger2, ultrasonic.Echo2)
         sensor2 = 7
-        sensor3 = tof.tofsensor.readDistance()
+        sensor3 = tof.tofsensor.readDistance()/100  # convert cm to m
         # sensor3 = 9
         # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
 
@@ -54,6 +54,7 @@ def update():
     global sensor3Average
 
     led = int(round(sensor1Average))
+    # Sensor Cutoffs
     if sensor1Average <= 2:
         led = sensor1Average
     elif sensor2Average <= 6:

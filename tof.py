@@ -168,6 +168,8 @@ class TFminiI2C:
 
 
 tofsensor = TFminiI2C(1, 0x10)
+tofsensor.setUnit(0x01) # this is centimeters
+tofsensor.setRange(0x07)
 """
 Example usage:
 
