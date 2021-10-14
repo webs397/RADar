@@ -130,11 +130,12 @@ def turn_leds_off():
 
 
 # SETUP
-GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
 print('set to Board')
 # LEDs = [25, 24, 23, 22, 21, 29, 28, 27, 26, 6]  # LED pin layout for GPIO
+LEDs = [LED(25), LED(24), LED(23), LED(22), LED(21), LED(29), LED(28), LED(27), LED(26), LED(6)]  # LED pin layout for GPIO and new LED Library
 # LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
-LEDs = [LED(37), LED(35), LED(33), LED(31), LED(29), LED(40), LED(38), LED(36), LED(32), LED(22)] # LED pin layout for Board and new LED library
+# LEDs = [LED(37), LED(35), LED(33), LED(31), LED(29), LED(40), LED(38), LED(36), LED(32), LED(22)] # LED pin layout for Board and new LED library
 turn_leds_off()
 
 oldled = 0
