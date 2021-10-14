@@ -71,7 +71,7 @@ def gpio_zuordnung(led_nr):
         GPIO.output(LEDs[0], True)
         print('led activated: ', led_nr)
     elif led_nr == 2:
-        GPIO.output(LEDs[1], True)
+        GPIO.output(LEDs[1], False)
         print('led activated: ', led_nr)
     elif led_nr == 3:
         GPIO.output(LEDs[2], True)
