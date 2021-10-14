@@ -1,4 +1,4 @@
-# import tof
+import tof
 # import ultrasonic
 import time
 import RPi.GPIO as GPIO
