@@ -159,6 +159,7 @@ while True:
         scan(5)
         update()
         time.sleep(10)
+        print("Cycle done!!!!!!!!!!!!!")
     except KeyboardInterrupt:
         GPIO.cleanup()
     except:
