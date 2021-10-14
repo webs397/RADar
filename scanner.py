@@ -158,8 +158,11 @@ while True:
     try:
         scan(5)
         update()
-        time.sleep(5)
+        time.sleep(10)
     except KeyboardInterrupt:
         GPIO.cleanup()
     except:
         print('some error')
+
+    finally:
+        GPIO.cleanup()
