@@ -153,7 +153,7 @@ try:
     while True:
         scan(5)
         update()
-        time.sleep(1)
+        time.sleep(3)
         print("Cycle done!")
 finally:
     GPIO.cleanup()
