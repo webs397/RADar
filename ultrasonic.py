@@ -3,13 +3,13 @@ import RPi.GPIO as GPIO
 import time
 
 # GPIO mode
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 # GPIO PINS and other Variables
-Trigger1 = 15  # this is pin 15, this might not work on a pin that isn't PWM lets test
-Echo1 = 13  # this is pin 13
-Trigger2 = 18  # this is pin 18, this might not work on a pin that isn't PWM lets test
-Echo2 = 16  # this is pin 16
+Trigger1 = 22  # this is pin 15, this might not work on a pin that isn't PWM lets test
+Echo1 = 27  # this is pin 13
+Trigger2 = 24  # this is pin 18, this might not work on a pin that isn't PWM lets test
+Echo2 = 23  # this is pin 16
 TriggerTime = 0.00001  # This is 0.01ms
 
 # set GPIO in or out

@@ -1,8 +1,9 @@
 import tof
-# import ultrasonic
+import ultrasonic
 import time
 import RPi.GPIO as GPIO
 from gpiozero import LED
+import math
 
 
 def scan(scanAmount):
@@ -11,8 +12,8 @@ def scan(scanAmount):
     sum3 = 0
     for x in range(scanAmount):
         # Read all Sensor distance values
-        # sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
-        sensor1 = 3
+        sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
+        # sensor1 = 3
         # sensor2 = ultrasonic.distance(ultrasonic.Trigger2, ultrasonic.Echo2)
         sensor2 = 7
         sensor3 = tof.tofsensor.readDistance()/100  # convert cm to m
@@ -53,13 +54,16 @@ def update():
     global sensor2Average
     global sensor3Average
 
-    # Sensor Cutoffs
+    # Sensor Cutoffs (using ceil so the number is
     if sensor1Average <= 2:
-        led = int(round(sensor1Average))
+        if sensor1Average < 0.5:
+            led = int(math.ceil(sensor1Average))
+        else:
+            led = int(round(sensor1Average))
     elif sensor2Average <= 6:
-        led = int(round(sensor2Average))
+        led = int(math.ceil(sensor2Average))
     elif sensor3Average <= 10:
-        led = int(round(sensor3Average))
+        led = int(math.ceil(sensor3Average))
     else:
         led = 0
 
@@ -149,7 +153,7 @@ try:
     while True:
         scan(5)
         update()
-        time.sleep(5)
-        print("Cycle done!!!!!!!!!!!!!")
+        time.sleep(1)
+        print("Cycle done!")
 finally:
     GPIO.cleanup()
