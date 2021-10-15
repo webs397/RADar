@@ -35,12 +35,14 @@ def scan(scanAmount):
     sensor2Average = sum2 / scanAmount
     sensor3Average = sum3 / scanAmount
 
+    print("-----------------------")
     print("Sensor1:")
     print(sensor1Average)
     print("Sensor2:")
     print(sensor2Average)
     print("Sensor3:")
     print(sensor3Average)
+    print("-----------------------")
 
     # return sensor1Average, sensor2Average, sensor3Average
 
@@ -110,8 +112,8 @@ def gpio_zuordnung(led_nr):
 def gpio_control():
     global led
     global oldled
-    print("led and old led")
-    print(led, oldled)
+    print("led:", led)
+    print("oldled:", oldled)
     if led != oldled:
         turn_leds_off()
         oldled = led
@@ -135,7 +137,7 @@ def turn_leds_off():
 
 # SETUP
 #GPIO.setmode(GPIO.BOARD)
-print('set to Board')
+# print('set to Board')
 # LEDs = [26, 19, 13, 6, 5, 21, 20, 16, 12, 25]  # LED pin layout for GPIO
 LEDs = [LED(26), LED(19), LED(13), LED(6), LED(5), LED(21), LED(20), LED(16), LED(12), LED(25)]  # LED pin layout for GPIO and new LED Library
 # LEDs = [37, 35, 33, 31, 29, 40, 38, 36, 32, 22] # LED pin layout for Board
