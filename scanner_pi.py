@@ -1,5 +1,5 @@
-import tof
-import ultrasonic
+import tof_pi
+import ultrasonic_pi
 import time
 import RPi.GPIO as GPIO
 from gpiozero import LED
@@ -12,11 +12,11 @@ def scan(scanAmount):
     sum3 = 0
     for x in range(scanAmount):
         # Read all Sensor distance values
-        sensor1 = ultrasonic.distance(ultrasonic.Trigger1, ultrasonic.Echo1)
+        sensor1 = ultrasonic_pi.distance(ultrasonic_pi.Trigger1, ultrasonic_pi.Echo1)
         # sensor1 = 3
         # sensor2 = ultrasonic.distance(ultrasonic.Trigger2, ultrasonic.Echo2)
         sensor2 = 7
-        sensor3 = tof.tofsensor.readDistance()/100  # convert cm to m
+        sensor3 = tof_pi.tofsensor.readDistance() / 100  # convert cm to m
         # sensor3 = 9
         # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
 
