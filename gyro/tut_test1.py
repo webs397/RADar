@@ -8,9 +8,11 @@ class Gyroboi:
         self.mpu = adafruit_mpu6050.MPU6050(self.i2c)
 
     def get_acceleration(self):
+        # in m/s^s
         return self.mpu.acceleration
 
     def get_gyro(self):
+        # in °/s
         return self.mpu.gyro
 
     def get_temperature(self):
