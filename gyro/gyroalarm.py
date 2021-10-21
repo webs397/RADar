@@ -21,20 +21,11 @@ class Gyroboi:
 
 
 class Alarm:
-    def __init__(self, past_seconds = 3, frequencie=20):
+    def __init__(self, frequencie=40):
         self.gyro = Gyroboi()
-        self.small_buffer = [[None]*4]*3
-        self.counter_size = int(past_seconds/((1/frequencie) * 4))
-        self.small_counter = 0
-        self.past_average = [0]*3
-
-    def calculate_average(self, new_values):
-        new_average = [0]*3
-        for i in range(0,3):
-            new_average[i] = self.past_average[i] + round((new_values[i]/self.counter_size),3)
-        self.past_average = new_average
-        return new_average
-
+        self.small_counter = 0.1/(1/frequencie)
+        self.small_buffer = [[None]*self.small_counter]*3
+        
     def fill_buffer(self):
         if self.small_counter >= 4:
             self.small_counter = 0
@@ -44,20 +35,22 @@ class Alarm:
                 for i in range(0,4):
                     new_values[counter] += round(coord[i]/4,3)
                 counter += 1
-            self.calculate_average(new_values)
+            self.calculate_alarm()
         
         acc = self.gyro.get_acceleration()
         for i in range(0,3):
             self.small_buffer[i][self.small_counter] = acc[i]
         self.small_counter += 1        
         
-    def compare_value(self, value):
-        # compare the new value to the average of the wanted seconds and calculate if the should be an alarm
-        return 0
+    def calculate_alarm(self,values):
+        # look if the acceleration on the y axis is higher than 3.5 m/s^2
+        print('X: ', values[0], '\tY: ', values[1], '\tZ: ', values[2])
+        if values[1] >= 3.5:
+            print('ALARM')
 
 
 if __name__ == '__main__':
-    frequenz = 20
+    frequenz = 40
     myalarm = Alarm(frequencie=frequenz)
     while True:
         try:
