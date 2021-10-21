@@ -5,7 +5,7 @@ import adafruit_mpu6050
 class Gyro:
     def __init__(self):
         self.i2c = board.I2C()
-        self.mpu = adafruit_mpu6050.MPU6050(i2c)
+        self.mpu = adafruit_mpu6050.MPU6050(self.i2c)
 
     def get_acceleration(self):
         return self.mpu.acceleration
