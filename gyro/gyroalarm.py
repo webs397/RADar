@@ -26,7 +26,7 @@ class Alarm:
         self.small_buffer = [[None]*4]*3
         self.counter_size = int(past_seconds/((1/frequencie) * 4))
         self.small_counter = 0
-        self.past_average = []
+        self.past_average = [0]*3
 
     def calculate_average(self, new_values):
         new_average = [0]*3
