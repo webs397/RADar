@@ -23,7 +23,7 @@ class Gyroboi:
 class Alarm:
     def __init__(self, frequencie=40):
         self.gyro = Gyroboi()
-        self.small_counter = 0.1/(1/frequencie)
+        self.small_counter = int(0.1/(1/frequencie))
         self.small_buffer = [[None]*self.small_counter]*3
         
     def fill_buffer(self):
