@@ -29,9 +29,9 @@ class Alarm:
         self.past_average = []
 
     def calculate_average(self, new_values):
-        new_average = []*3
+        new_average = [0]*3
         for i in range(0,3):
-            new_average[i] = self.past_average[i] + round(new_values[i]/self.counter_size,3)
+            new_average[i] = self.past_average[i] + round((new_values[i]/self.counter_size),3)
         self.past_average = new_average
         return new_average
 
