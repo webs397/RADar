@@ -21,14 +21,14 @@ class Gyroboi:
 
 
 class Alarm:
-    def __init__(self, frequencie=40):
+    def __init__(self,values_per_second=10, frequencie=40):
         self.gyro = Gyroboi()
-        self.max_counter = int(0.1/(1/frequencie))
+        self.max_counter = int((1/values_per_second)/(1/frequencie))
         self.small_buffer = [[None]*self.max_counter]*3
         self.small_counter = 0
 
     def fill_buffer(self):
-        if self.small_counter >= 4:
+        if self.small_counter >= self.max_counter:
             self.small_counter = 0
             new_values = [0]*3
             counter = 0
@@ -40,7 +40,8 @@ class Alarm:
         acc = self.gyro.get_acceleration()
         for i in range(0,3):
             self.small_buffer[i][self.small_counter] = acc[i]
-        self.small_counter += 1        
+        print(self.small_buffer)
+        self.small_counter += 1
         
     def calculate_alarm(self,values):
         # look if the acceleration on the y axis is higher than 3.5 m/s^2
