@@ -30,8 +30,8 @@ if __name__ == '__main__':
             tmp = mygyro.get_gyro()
             for i in range(0,3):
                 gyro[i] = round(tmp[i], 3)
-            print('Acceleration: X:', acc[0],' Y:', acc[1], ' Z:', acc[2])
-            print('Gyro:         X:', gyro[0], ' Y:', gyro[1], ' Z:', gyro[2])
+            print('Acceleration: X:', acc[0],'\tY:', acc[1], '\tZ:', acc[2])
+            print('Gyro:         X:', gyro[0], '\tY:', gyro[1], '\tZ:', gyro[2])
             print('Temperature : ', round(mygyro.get_temperature(),3))
             time.sleep(0.1)
         except KeyboardInterrupt:
