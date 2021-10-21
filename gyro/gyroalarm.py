@@ -37,11 +37,9 @@ class Alarm:
                     new_values[counter] += round(coord[i]/4,3)
                 counter += 1
             self.calculate_alarm()
-        
         acc = self.gyro.get_acceleration()
         for i in range(0,3):
             self.small_buffer[i][self.small_counter] = acc[i]
-        #print(self.small_buffer)
         self.small_counter += 1        
         
     def calculate_alarm(self,values):
@@ -57,7 +55,6 @@ if __name__ == '__main__':
     while True:
         try:
             myalarm.fill_buffer()
-            print(myalarm.past_average)
             time.sleep(1/frequenz)
         except KeyboardInterrupt:
             break
