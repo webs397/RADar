@@ -38,7 +38,7 @@ class Alarm:
     def fill_buffer(self):
         if self.small_counter >= 4:
             self.small_counter = 0
-            new_values = [None]*3
+            new_values = [0]*3
             counter = 0
             for coord in self.small_buffer:
                 for i in range(0,4):
