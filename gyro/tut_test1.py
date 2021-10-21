@@ -19,8 +19,8 @@ class Gyroboi:
 
 if __name__ == '__main__':
     mygyro = Gyroboi()
-    acc = []
-    gyro = []
+    acc = []*3
+    gyro = []*3
     tmp = None
     while True:
         try:
