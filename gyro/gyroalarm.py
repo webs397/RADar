@@ -24,7 +24,7 @@ class Alarm:
     def __init__(self,values_per_second=10, frequencie=40):
         self.gyro = Gyroboi()
         self.max_counter = int((1/values_per_second)/(1/frequencie))
-        self.small_buffer = [[None]*self.max_counter]*3
+        self.small_buffer = {'x': [None]*self.max_counter,'y': [None]*self.max_counter,'z': [None]*self.max_counter}
         self.small_counter = 0
 
     def fill_buffer(self):
@@ -32,15 +32,15 @@ class Alarm:
             self.small_counter = 0
             new_values = [0]*3
             counter = 0
-            for coord in self.small_buffer:
-                for i in range(0,4):
-                    new_values[counter] += round(coord[i]/4,3)
+            for _,liste in self.small_buffer.items():
+                for i in range(0,self.max_counter):
+                    new_values[counter] += round(liste[i]/4,3)
                 counter += 1
             self.calculate_alarm(new_values)
         acc = self.gyro.get_acceleration()
-        for i in range(0,3):
-            self.small_buffer[i][self.small_counter] = acc[i]
-        print(self.small_buffer)
+        self.small_buffer['x'][self.small_counter] = acc[0]
+        self.small_buffer['y'][self.small_counter] = acc[1]
+        self.small_buffer['z'][self.small_counter] = acc[2]
         self.small_counter += 1
         
     def calculate_alarm(self,values):
