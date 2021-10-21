@@ -23,9 +23,10 @@ class Gyroboi:
 class Alarm:
     def __init__(self, frequencie=40):
         self.gyro = Gyroboi()
-        self.small_counter = int(0.1/(1/frequencie))
+        self.max_counter = int(0.1/(1/frequencie))
         self.small_buffer = [[None]*self.small_counter]*3
-        
+        self.small_counter = 0
+
     def fill_buffer(self):
         if self.small_counter >= 4:
             self.small_counter = 0
@@ -40,7 +41,7 @@ class Alarm:
         acc = self.gyro.get_acceleration()
         for i in range(0,3):
             self.small_buffer[i][self.small_counter] = acc[i]
-        print(self.small_buffer)
+        #print(self.small_buffer)
         self.small_counter += 1        
         
     def calculate_alarm(self,values):
