@@ -57,11 +57,11 @@ class Alarm:
 
 
 if __name__ == '__main__':
-    myalarm = Alarm()
     frequenz = 20
+    myalarm = Alarm(frequencie=frequenz)
     while True:
         try:
-            myalarm.fill_buffer(frequencie=frequenz)
+            myalarm.fill_buffer()
             print(myalarm.past_average)
             time.sleep(1/frequenz)
         except KeyboardInterrupt:
