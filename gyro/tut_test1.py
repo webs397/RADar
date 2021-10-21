@@ -21,9 +21,9 @@ if __name__ == '__main__':
     mygyro = Gyroboi()
     while True:
         try:
-            print('Acceleration: ', mygyro.get_acceleration())
-            print('Gyro: ', mygyro.get_gyro())
-            print('Temperature :', mygyro.get_temperature())
+            print('Acceleration: ', round(mygyro.get_acceleration(),3))
+            print('Gyro:         ', round(mygyro.get_gyro(),3))
+            print('Temperature : ', round(mygyro.get_temperature(),3))
             time.sleep(0.1)
         except KeyboardInterrupt:
             break
