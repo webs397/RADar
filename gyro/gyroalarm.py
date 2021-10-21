@@ -21,9 +21,9 @@ class Gyroboi:
 
 
 class Alarm:
-    def __init__(self,values_per_second=10, frequencie=40):
+    def __init__(self,values_per_second=10, frequency=40):
         self.gyro = Gyroboi()
-        self.max_counter = int((1/values_per_second)/(1/frequencie))
+        self.max_counter = int((1/values_per_second)/(1/frequency))
         self.small_buffer = {'x': [None]*self.max_counter,'y': [None]*self.max_counter,'z': [None]*self.max_counter}
         self.small_counter = 0
 
@@ -34,13 +34,13 @@ class Alarm:
             counter = 0
             for _,liste in self.small_buffer.items():
                 for i in range(0,self.max_counter):
-                    new_values[counter] += round(liste[i]/4,3)
+                    new_values[counter] += round(liste[i]/4,2)
                 counter += 1
             self.calculate_alarm(new_values)
         acc = self.gyro.get_acceleration()
-        self.small_buffer['x'][self.small_counter] = acc[0]
-        self.small_buffer['y'][self.small_counter] = acc[1]
-        self.small_buffer['z'][self.small_counter] = acc[2]
+        self.small_buffer['x'][self.small_counter] = round(acc[0],2)
+        self.small_buffer['y'][self.small_counter] = round(acc[1],2)
+        self.small_buffer['z'][self.small_counter] = round(acc[2],2)
         self.small_counter += 1
         
     def calculate_alarm(self,values):
@@ -52,7 +52,7 @@ class Alarm:
 
 if __name__ == '__main__':
     frequenz = 40
-    myalarm = Alarm(frequencie=frequenz)
+    myalarm = Alarm(frequency=frequenz)
     while True:
         try:
             myalarm.fill_buffer()
