@@ -2,7 +2,7 @@ import time
 import board
 import adafruit_mpu6050
 
-class Gyro:
+class Gyroboi:
     def __init__(self):
         self.i2c = board.I2C()
         self.mpu = adafruit_mpu6050.MPU6050(self.i2c)
@@ -18,12 +18,12 @@ class Gyro:
 
 
 if __name__ == '__main__':
-    mygyro = Gyro()
+    mygyro = Gyroboi()
     while True:
         try:
-            print('Acceleration: ', mygyro.get_acceleration)
-            print('Gyro: ', mygyro.get_gyro)
-            print('Temperature :', mygyro.get_temperature)
+            print('Acceleration: ', mygyro.get_acceleration())
+            print('Gyro: ', mygyro.get_gyro())
+            print('Temperature :', mygyro.get_temperature())
             time.sleep(0.1)
         except KeyboardInterrupt:
             break
