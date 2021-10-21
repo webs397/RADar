@@ -25,11 +25,11 @@ if __name__ == '__main__':
     while True:
         try:
             tmp = mygyro.get_acceleration()
-            for value in tmp:
-                acc[tmp.index(value)] = round(value,3)
+            for i in range(0,3):
+                acc[i] = round(tmp[i], 3)
             tmp = mygyro.get_gyro()
-            for value in tmp:
-                gyro[tmp.index(value)] = round(value,3)
+            for i in range(0,3):
+                gyro[i] = round(tmp[i], 3)
             print('Acceleration: X:', acc[0],' Y:', acc[1], ' Z:', acc[2])
             print('Gyro:         X:', gyro[0], ' Y:', gyro[1], ' Z:', gyro[2])
             print('Temperature : ', round(mygyro.get_temperature(),3))
