@@ -19,10 +19,19 @@ class Gyroboi:
 
 if __name__ == '__main__':
     mygyro = Gyroboi()
+    acc = []
+    gyro = []
+    tmp = None
     while True:
         try:
-            print('Acceleration: ', round(mygyro.get_acceleration(),3))
-            print('Gyro:         ', round(mygyro.get_gyro(),3))
+            tmp = mygyro.get_acceleration()
+            for value in tmp:
+                acc[tmp.index(value)] = round(value,3)
+            tmp = mygyro.get_gyro()
+            for value in tmp:
+                gyro[tmp.index(value)] = round(value,3)
+            print('Acceleration: X:', acc[0],' Y:', acc[1], ' Z:', acc[2])
+            print('Gyro:         X:', gyro[0], ' Y:', gyro[1], ' Z:', gyro[2])
             print('Temperature : ', round(mygyro.get_temperature(),3))
             time.sleep(0.1)
         except KeyboardInterrupt:
