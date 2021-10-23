@@ -12,7 +12,7 @@ class Server:
         print('waiting for messages ...')
         while True:
             try:
-                (data, addr) = self.udp_socket.recvfrom()
+                (data, addr) = self.udp_socket.recvfrom(8192)
                 data = json.loads(data)
                 print('received: ', data, 'from :', addr)
             except KeyboardInterrupt:
