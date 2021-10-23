@@ -27,7 +27,7 @@ class Alarm:
         self.small_buffer = {'x': [None]*self.max_counter,'y': [None]*self.max_counter,'z': [None]*self.max_counter}
         self.small_counter = 0
 
-    def fill_buffer(self):
+    def compute_measurments(self):
         if self.small_counter >= self.max_counter:
             self.small_counter = 0
             new_values = [0]*3
@@ -36,26 +36,30 @@ class Alarm:
                 for i in range(0,self.max_counter):
                     new_values[counter] += round(liste[i]/4,2)
                 counter += 1
-            self.calculate_alarm(new_values)
-        acc = self.gyro.get_acceleration()
-        self.small_buffer['x'][self.small_counter] = round(acc[0],2)
-        self.small_buffer['y'][self.small_counter] = round(acc[1],2)
-        self.small_buffer['z'][self.small_counter] = round(acc[2],2)
-        self.small_counter += 1
+            return self.calculate_alarm(new_values)
+        else:
+            acc = self.gyro.get_acceleration()
+            self.small_buffer['x'][self.small_counter] = round(acc[0],2)
+            self.small_buffer['y'][self.small_counter] = round(acc[1],2)
+            self.small_buffer['z'][self.small_counter] = round(acc[2],2)
+            self.small_counter += 1
         
     def calculate_alarm(self,values):
         # look if the acceleration on the y axis is higher than 3.5 m/s^2
-        print('X: ', values[0], '\tY: ', values[1], '\tZ: ', values[2])
+        # the following line can be uncommented for debug purposes
+        #print('X: ', values[0], '\tY: ', values[1], '\tZ: ', values[2])
         if values[1] >= 3.5:
-            print('ALARM')
+            return True
+        else:
+            return False
 
 
 if __name__ == '__main__':
-    frequenz = 40
+    frequenz = 40                           # set the frequency on which the program runs
     myalarm = Alarm(frequency=frequenz)
     while True:
         try:
-            myalarm.fill_buffer()
-            time.sleep(1/frequenz)
+            alarm = myalarm.compute_measurments()   # either True or Falses
+            time.sleep(1/frequenz)      
         except KeyboardInterrupt:
             break

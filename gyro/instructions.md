@@ -7,10 +7,11 @@
 2. in a while loop call the *fill_buffer* method of the Alarm class with the desired frequencie  
 - Example:  
 ```
-myalarm = Alarm()
-while True:
-    myalarm.fill_buffer()
-    time.sleep(1/40)        # Frequency
+frequenz = 40
+myalarm = Alarm(frequency=frequenz)
+    while True:
+        alarm = myalarm.compute_measurments()   # either True or Falses
+        time.sleep(1/frequenz)
 ```
 
 # TODO
