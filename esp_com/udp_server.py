@@ -29,5 +29,5 @@ class Server:
     def close_connection(self):
         self.udp_socket.close()
 
-myserver = Server('192.168.0.69', 6969, b'BenStinktWieFish')
+myserver = Server('', 6969, b'BenStinktWieFish')
 myserver.receive_data()
