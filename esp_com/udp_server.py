@@ -20,8 +20,11 @@ class Server:
         while True:
             try:
                 (data, addr) = self.udp_socket.recvfrom(8192)
+                print('ENCRYPTED:')
+                print('received: ', msg, 'from :', addr)
                 msg = self.entschluesseln(data)
                 msg = json.loads(msg)
+                print('DECRYPTED:')
                 print('received: ', msg, 'from :', addr)
             except KeyboardInterrupt:
                 self.udp_socket.close()
