@@ -1,6 +1,32 @@
 import socket
 import json
+import os
+import time
 from Crypto.Cipher import AES
+
+SECRET = b'BenStinktWieFish'
+
+
+class Networker:
+    def __init__(self, mode, network_ssid, network_password):
+        # mode can be either AP or ST (access point or station)
+        self.interface = 'wlan0'
+        self.mode = mode
+        self.ssid = network_ssid
+        self.password = network_password
+        self.my_ip = None
+        # connect to network
+        self.connect()
+        # server handler
+        self.server = Server('', 6969, SECRET)
+        self.server.receive_data()
+
+    def connect(self):
+        os.system('iwconfig ' + self.interface + ' essid ' + self.ssid + ' key ' + self.password)
+        #wait until connected
+        time.sleep(7)
+
+
 
 class Server:
     def __init__(self, client_ip_address, port, secret):
@@ -29,5 +55,10 @@ class Server:
     def close_connection(self):
         self.udp_socket.close()
 
+'''
 myserver = Server('', 6969, b'BenStinktWieFish')
 myserver.receive_data()
+'''
+
+# networker aufrufen, der macht dann sein server ding vallah
+networker = Networker('ST', 'RADar', 'BDE4Life!')
