@@ -25,7 +25,7 @@ class Networker:
 
     def first_exchange(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_address = ('localhost', 55556)
+        server_address = ('localhost', 5556) 
         print('connecting to port: ', server_address)
         sock.connect(server_address)
         try:
