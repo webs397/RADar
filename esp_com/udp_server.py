@@ -76,7 +76,4 @@ myserver.receive_data()
 
 # networker aufrufen, der macht dann sein server ding vallah
 if __name__ == '__main__':
-    try:
-        networker = Networker('ST', 'RADar', 'BDE4Life!')
-    except:
-        os.system('sudo iwconfig ' + INTERFACE + ' essid ' + HOME_NETWORK['ssid'] + ' key ' + HOME_NETWORK['password'])
+    networker = Networker('ST', 'RADar', 'BDE4Life!')
