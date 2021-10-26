@@ -23,7 +23,7 @@ class Networker:
         self.server.receive_data()
 
     def connect(self):
-        os.system('iwconfig ' + INTERFACE + ' essid ' + self.ssid + ' key ' + self.password)
+        os.system('sudo iwconfig ' + INTERFACE + ' essid ' + self.ssid + ' key ' + self.password)
         #wait until connected
         time.sleep(7)
 
@@ -66,4 +66,4 @@ if __name__ == '__main__':
     try:
         networker = Networker('ST', 'RADar', 'BDE4Life!')
     except:
-        os.system('iwconfig ' + INTERFACE + ' essid ' + HOME_NETWORK['ssid'] + ' key ' + HOME_NETWORK['password'])
+        os.system('sudo iwconfig ' + INTERFACE + ' essid ' + HOME_NETWORK['ssid'] + ' key ' + HOME_NETWORK['password'])
