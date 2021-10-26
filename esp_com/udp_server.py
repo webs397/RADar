@@ -3,6 +3,7 @@ import json
 import os
 import time
 from Crypto.Cipher import AES
+import wifi
 
 SECRET = b'BenStinktWieFish'
 HOME_NETWORK = {'ssid' : 'Corona-Emitting 5G Tower', 'password': 'YoushallnotPassword42'}
@@ -17,15 +18,27 @@ class Networker:
         self.password = network_password
         self.my_ip = None
         # connect to network
-        self.connect()
+        self.first_exchange()
         # server handler
         self.server = Server('', 6969, SECRET)
         self.server.receive_data()
 
-    def connect(self):
-        os.system('sudo iwconfig ' + INTERFACE + ' essid ' + self.ssid + ' key ' + self.password)
-        #wait until connected
-        time.sleep(7)
+    def first_exchange(self):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_address = ('localhost', 55556)
+        print('connecting to port: ', server_address)
+        sock.connect(server_address)
+        try:
+            message = b'Hi, im raspi'
+            sock.sendall(message)
+            amount_received = 0
+            amound_expected = len(message)
+            while amount_received < amound_expected:
+                data = sock.recv(16)
+                amount_received += len(data)
+                print('received: ', data)
+        finally:
+            sock.close()
 
 
 
