@@ -8,7 +8,7 @@ import wifi
 SECRET = b'BenStinktWieFish'
 HOME_NETWORK = {'ssid' : 'Corona-Emitting 5G Tower', 'password': 'YoushallnotPassword42'}
 INTERFACE = 'wlan0'
-
+IP_ESP = '192.168.4.1'
 
 class Networker:
     def __init__(self, mode, network_ssid, network_password):
@@ -25,7 +25,7 @@ class Networker:
 
     def first_exchange(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_address = ('localhost', 5556) 
+        server_address = (IP_ESP, 5556) 
         print('connecting to port: ', server_address)
         sock.connect(server_address)
         try:
