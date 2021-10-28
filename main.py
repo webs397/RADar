@@ -70,11 +70,8 @@ def scan(scanAmount):
     for x in range(scanAmount):
         # Read all Sensor distance values
         sensor1 = SonicDistance(trigger1, echo1)
-        # sensor1 = 3
         sensor2 = SonicDistance(trigger2, echo2)
-        sensor2 = 7
         sensor3 = getLidarData(i2c0, address, getLidarDataCmd) / 100  # convert cm to m
-        # Cut off for ultrasonic sensor so only detect objects 2 meters close (our lane)
 
         # Collect Values
         sum1 += sensor1
