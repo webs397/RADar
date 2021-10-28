@@ -115,7 +115,7 @@ def update():
         else:
             led = int(round(sensor1Average))
             activatedSensor = "Sensor1"
-    elif sensor2Average <= 6:
+    elif sensor2Average <= 4:
         led = int(math.floor(sensor2Average))
         activatedSensor = "Sensor2"
     elif sensor3Average <= 10:
