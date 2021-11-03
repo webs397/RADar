@@ -82,8 +82,8 @@ class Client:
         encrypted = self.cipher.encrypt(msg)
         return encrypted
         
-    def send_udp(self, data):
-        data = json.dumps(data)
+    def send_udp(self, msg):
+        data = json.dumps(msg)
         msg = self.verschluesseln(data)
         self.udp_socket.sendto(msg, self.server_ip)
              
