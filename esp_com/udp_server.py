@@ -24,10 +24,16 @@ class Networker:
         self.server.receive_data()
 
     def first_exchange(self):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_address = (IP_ESP, 5556) 
-        print('connecting to port: ', server_address)
-        sock.connect(server_address)
+        while True:
+            try:
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                server_address = (IP_ESP, 5556) 
+                print('connecting to port: ', server_address)
+                sock.connect(server_address)
+                break
+            except:
+                print('not connected yet')
+
         try:
             message = b'Hi, im raspi'
             sock.sendall(message)
