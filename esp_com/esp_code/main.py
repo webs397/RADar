@@ -23,5 +23,5 @@ if __name__ == '__main__':
     except Exception as e:
         print('there was an exception:', e)
     finally:
-        networker.network.acive(False)
+        networker.network.active(False)
         networker.close_connection()
