@@ -126,8 +126,10 @@ def update():
 
     return message
 
-
+# BEISPIELCODE
+'''
 while True:
     scan(5)
     update()
     time.sleep(1)
+'''

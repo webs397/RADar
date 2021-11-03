@@ -1,26 +1,27 @@
 from networking import *
-import random
 import time
+import sensing
 
 SSID = 'RADar'
 PASSWORT = 'BDE4Life!'
+FREQUENZ = 10
 
-# Handler
-
-
-# LED WERTE
 if __name__ == '__main__':
-    led = {'led' : 0}
     try:
         networker = Networker('AP',SSID, PASSWORT)
-        for i in range(0,20):
-            # LED Werte erfinden
-            led['led'] = random.randint(1,20)
-            print('gesendet: ', led)
-            networker.client.send_udp(led)
-            time.sleep(0.01)
-    except:
-        print('there was an exception')
+        
+        while True:
+            sensing.scan(5)
+            msg = sensing.update()
+            networker.client.send_udp(msg)
+            time.sleep(1/FREQUENZ)
+            # check some button for shutdown
+            '''
+            if button pressed:
+                break
+            '''
+    except Exception as e:
+        print('there was an exception:', e)
     finally:
         networker.network.acive(False)
         networker.close_connection()
