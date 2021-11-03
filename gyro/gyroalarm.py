@@ -53,7 +53,7 @@ class Alarm:
         else:
             return False
 
-
+'''
 if __name__ == '__main__':
     frequenz = 40                           # set the frequency on which the program runs
     myalarm = Alarm(frequency=frequenz)
@@ -63,3 +63,4 @@ if __name__ == '__main__':
             time.sleep(1/frequenz)      
         except KeyboardInterrupt:
             break
+        '''

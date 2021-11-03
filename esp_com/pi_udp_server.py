@@ -21,7 +21,7 @@ class Networker:
         self.first_exchange()
         # server handler
         self.server = Server('', 6969, SECRET)
-        self.server.receive_data()
+        #self.server.receive_data()
 
     def first_exchange(self):
         while True:
@@ -65,10 +65,11 @@ class Server:
         print('waiting for messages ...')
         while True:
             try:
-                (data, addr) = self.udp_socket.recvfrom(8192)
+                (data, _) = self.udp_socket.recvfrom(8192)
                 msg = self.entschluesseln(data)
                 msg = json.loads(msg)
-                print('received: ', msg, 'from :', addr)
+                # print('received: ', msg, 'from :', addr)
+                return msg
             except KeyboardInterrupt:
                 self.udp_socket.close()
     
@@ -79,7 +80,18 @@ class Server:
 myserver = Server('', 6969, b'BenStinktWieFish')
 myserver.receive_data()
 '''
-
+'''
 # networker aufrufen, der macht dann sein server ding vallah
 if __name__ == '__main__':
     networker = Networker('ST', 'RADar', 'BDE4Life!')
+'''
+
+
+
+# ANLEITUNG:
+'''
+eine networker instanz erstellen, nach folgendem modell:
+--> networker = Networker('ST', 'RADar', 'BDE4Life!')
+danach diesen networker nutzen um daten zu kriegen:
+--> networker.server.receive_data()
+'''
