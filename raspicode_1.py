@@ -39,7 +39,7 @@ if __name__ == '__main__':
             
             # Daten kriegen und die LEDs entsprechend schalten
             esp_msg = networker.server.receive_data()
-            # --> philipps led-steuercode wird benötigt
+            # --> philipps led-steuercode wird benoetigt
 
             # Frequenz setzen
             time.sleep(1/frequenz)
