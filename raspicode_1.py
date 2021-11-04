@@ -2,6 +2,7 @@ import zmq
 import time
 from gyro.gyroalarm import *
 from esp_com.pi_udp_server import *
+from led_control.control import *
 
 # ---EXAMPLE PACKAGE---
 # package = {'reason':'demand'}           #the reason can be either 'demand' or 'danger'
@@ -25,7 +26,11 @@ if __name__ == '__main__':
     myalarm = Alarm(frequency=frequenz)
     # networker
     networker = Networker('ST', 'RADar', 'BDE4Life!')
-
+    # led controller
+    PIN_DATA = 16
+    PIN_LATCH = 20
+    PIN_CLOCK = 21
+    led_controller = LEDCONTROLLER(PIN_DATA, PIN_LATCH, PIN_CLOCK)
     # ---LOOPING---
     try:
         while True:
@@ -39,8 +44,9 @@ if __name__ == '__main__':
             
             # Daten kriegen und die LEDs entsprechend schalten
             esp_msg = networker.server.receive_data()
+            print(esp_msg)
             # --> philipps led-steuercode wird benoetigt
-
+            led_controller.led_array(esp_msg)
             # Frequenz setzen
             time.sleep(1/frequenz)
     
