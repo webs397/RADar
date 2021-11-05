@@ -6,24 +6,9 @@ from time import sleep
 from machine import Timer
 from ucryptolib import aes
 
+
 SECRET = b'BenStinktWieFish'
 PARTNER_NAME = 'raspberrypi'
-
-class LEDController:
-    def __init__(self, greenPin, yellowPin, redPin, bluePin):
-        # the Pin numbers are equal to the GPIO Number of the Pin
-        self.green = Pin(greenPin, Pin.OUT)
-        self.yellow = Pin(yellowPin,Pin.OUT)
-        self.red = Pin(redPin,Pin.OUT)
-        self.blue = Pin(bluePin, Pin.OUT)
-        # all off
-        self.control_leds(0,0,0,0)
- 
-    def control_leds(green, yellow, red, blue):
-        self.green.value(green)
-        self.yellow.value(yellow)
-        self.red.value(red)
-        self.blue.value(blue)
 
 
 class Networker:
@@ -34,12 +19,8 @@ class Networker:
         self.password = network_password
         self.ip_address = None
         self.network = None
-        # LED handler
-        #self.led_control = LEDController(0,23,2,5)
         # create or connect network
         self.do_connect(self.ssid, self.password)
-        # Client Handler
-        self.client = Client(self.ip_address, PARTNER_NAME, 6969, SECRET)
                
     def do_connect(self, ssid, password):
         if self.mode == 'AP':
@@ -65,7 +46,16 @@ class Networker:
             print('network config:', wlan.ifconfig())
             self.network = wlan
             #LEDs
-                    
+
+    def turn_off(self):
+        self.client.close_connection()
+        self.network.active(False)
+
+    def turn_on(self):
+        self.network.active(True)
+        # Client Handler
+        self.client = Client(self.ip_address, PARTNER_NAME, 6969, SECRET)
+
 
 class Client:
     def __init__(self, own_ip, partnername, port, secret):
