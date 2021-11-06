@@ -55,8 +55,39 @@ class LEDCONTROLLER:
 
     def disp_leds(self,led):
         # number from 1 - 20
-        self.shift_update(self.bithelper[str(led)])
-        print(self.bithelper[str(led)])
+        #self.shift_update(self.bithelper[str(led)])
+        #print(self.bithelper[str(led)])
+        self.twenty_zeros()
+        for _ in range(0,led):
+            self.one_in()
 
     def my_end(self):
         GPIO.cleanup()
+
+    def one_in(self):
+        # input has to be an 24 bit string containing 0 or 1
+        GPIO.output(self.clock,0)
+        GPIO.output(self.latch,0)
+        GPIO.output(self.clock,1)
+
+        GPIO.output(self.clock,0)
+        GPIO.output(self.data,1)
+        GPIO.output(self.clock,1)
+
+        GPIO.output(self.clock, 0)
+        GPIO.output(self.latch,1)
+        GPIO.output(self.clock,1)
+
+    def twenty_zeros(self):
+        GPIO.output(self.clock,0)
+        GPIO.output(self.latch,0)
+        GPIO.output(self.clock,1)
+
+        for _ in range(0,20):
+            GPIO.output(self.clock,0)
+            GPIO.output(self.data,0)
+            GPIO.output(self.clock,1)
+
+        GPIO.output(self.clock, 0)
+        GPIO.output(self.latch,1)
+        GPIO.output(self.clock,1)
