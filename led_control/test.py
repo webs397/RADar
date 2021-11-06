@@ -8,6 +8,6 @@ while True:
         inp = int(input())
         led_controller = LEDCONTROLLER(PIN_DATA, PIN_LATCH, PIN_CLOCK)
         led_controller.led_array(inp)
-    except ValueError:
-        print('input was not a number')
+    except Exception as e:
+        print('There was an error:', e)
         break
