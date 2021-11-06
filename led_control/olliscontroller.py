@@ -9,7 +9,6 @@ class LEDCONTROLLER:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup((self.data,self.latch,self.clock),GPIO.OUT)
         self.bithelper = {
-            '0' : '000000000000000000000000',
             '1' : '100000000000000000000000',
             '2' : '110000000000000000000000',
             '3' : '111000000000000000000000',
