@@ -36,18 +36,18 @@ class LEDCONTROLLER:
         GPIO.output(self.clock,0)
         GPIO.output(self.latch,0)
         GPIO.output(self.clock,1)
-
+        '''
         for i in range(23,-1,-1):
             GPIO.output(self.clock,0)
             GPIO.output(self.data,0)
             GPIO.output(self.clock,1)
-
+        '''
         # load the data in reverse order
         for i in range(23,-1,-1):
             GPIO.output(self.clock,0)
             GPIO.output(self.data,int(input[i]))
             GPIO.output(self.clock,1)
-            GPIO.output(self.data, 0)
+            #GPIO.output(self.data, 0)
 
         # put latch up to store data on register
         GPIO.output(self.clock, 0)
@@ -56,11 +56,13 @@ class LEDCONTROLLER:
 
     def disp_leds(self,led):
         # number from 1 - 20
-        #self.shift_update(self.bithelper[str(led)])
-        #print(self.bithelper[str(led)])
-        self.twenty_zeros()
+        self.shift_update(self.bithelper[str(led)])
+        print(self.bithelper[str(led)])
+        '''
+        self.twentyfour_zeros()
         for _ in range(0,led):
             self.one_in()
+        '''
 
     def my_end(self):
         GPIO.cleanup()
