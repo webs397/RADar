@@ -26,9 +26,7 @@ class Networker:
     def first_exchange(self):
         while True:
             try:
-                time.sleep(10)
                 os.system("wpa_cli -i wlan0 reconfigure")
-                time.sleep(1)
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 server_address = (IP_ESP, 5556) 
                 print('connecting to port: ', server_address)
@@ -36,6 +34,7 @@ class Networker:
                 break
             except:
                 os.system("wpa_cli -i wlan0 reconfigure")
+                time.sleep(5)
                 print('not connected yet')
 
         try:
