@@ -47,6 +47,7 @@ class LEDCONTROLLER:
             GPIO.output(self.clock,0)
             GPIO.output(self.data,int(input[i]))
             GPIO.output(self.clock,1)
+            GPIO.output(self.data, 0)
 
         # put latch up to store data on register
         GPIO.output(self.clock, 0)
@@ -73,6 +74,7 @@ class LEDCONTROLLER:
         GPIO.output(self.clock,0)
         GPIO.output(self.data,1)
         GPIO.output(self.clock,1)
+        GPIO.output(self.data,0)
 
         GPIO.output(self.clock, 0)
         GPIO.output(self.latch,1)
