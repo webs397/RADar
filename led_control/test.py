@@ -1,7 +1,7 @@
 from newControl import *
 import time
 inp = None
-led_controller = Shifter
+led_controller = Shifter()
 
 while True:
     try:
