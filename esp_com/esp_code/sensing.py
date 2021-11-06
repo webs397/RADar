@@ -4,7 +4,7 @@ import math
 import json
 
 # ToF Setup
-i2c0 = I2C(scl=Pin(5), sda=Pin(4), freq=100000)
+i2c0 = I2C(1,scl=Pin(5), sda=Pin(4), freq=100000)
 
 print(i2c0.scan())
 address = 16

@@ -1,9 +1,9 @@
 import RPi.GPIO as GPIO
 import time
-
-PIN_DATA = 16
-PIN_LATCH = 20
-PIN_CLOCK = 21
+ 
+PIN_DATA = 13
+PIN_LATCH = 6
+PIN_CLOCK = 5
 
 class LEDCONTROLLER:
     def __init__(self,data_pin, latch_pin, clock_pin):

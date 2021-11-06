@@ -31,9 +31,9 @@ class Shifter(object):
     pins are low instead of high).
     .. note::
         You must ensure that the numbers you pass for the pins match the mode
-        you're using with `RPi.GPIO`.
+        you're using with `RPi.GPIO`. 
     """
-    def __init__(self, data_pin=16, latch_pin=20, clock_pin=21, invert=False):
+    def __init__(self, data_pin=13, latch_pin=6, clock_pin=5, invert=False):
         GPIO.setmode(GPIO.BCM)
         self.data_pin = data_pin
         self.latch_pin = latch_pin
