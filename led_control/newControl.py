@@ -105,7 +105,7 @@ class Shifter(object):
 
     def setLights(self, led):
         register_entry = self.led_counter[str(led)]
-        self.shift_out(register_entry[0], register_entry[1], register_entry[2])
+        self.shift_out(register_entry[0], register_entry[1])
 
 
     def all(self, state=LOW):
@@ -117,6 +117,7 @@ class Shifter(object):
             self.shift_out(0b11111111)
         else:
             self.shift_out(0)
+
 '''
 if __name__=="__main__":
     print("Testing shift register connection...")
