@@ -1,13 +1,13 @@
-from control import *
+from newControl import *
 
 inp = None
+led_controller = Shifter
 
 while True:
     try:
         print("distance: ")
         inp = int(input())
-        led_controller = LEDCONTROLLER(PIN_DATA, PIN_LATCH, PIN_CLOCK)
-        led_controller.led_array(inp)
+        led_controller.setLights(inp)
     except Exception as e:
         print('There was an error:', e)
         break
