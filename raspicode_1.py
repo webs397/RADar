@@ -48,7 +48,7 @@ if __name__ == '__main__':
             print(esp_msg)
             # --> philipps led-steuercode wird benoetigt
             #print(esp_msg)
-            led_controller.disp_leds(esp_msg)
+            #led_controller.disp_leds(esp_msg)
             # Frequenz setzen
             time.sleep(1/frequenz)
     
