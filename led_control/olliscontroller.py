@@ -31,13 +31,16 @@ class LEDCONTROLLER:
             '20' : '111111111111111111110000',
         }
 
-    
-
     def shift_update(self, input):
         # input has to be an 24 bit string containing 0 or 1
         GPIO.output(self.clock,0)
         GPIO.output(self.latch,0)
         GPIO.output(self.clock,1)
+
+        for i in range(23,-1,-1):
+            GPIO.output(self.clock,0)
+            GPIO.output(self.data,0)
+            GPIO.output(self.clock,1)
 
         # load the data in reverse order
         for i in range(23,-1,-1):
