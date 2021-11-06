@@ -37,6 +37,7 @@ if __name__ == '__main__':
             # Kamera Auslöser
             if myalarm.compute_measurments():
                 msg = {'reason':'danger'}
+                
             '''
             if button pressed:
                 msg = {'reason':'demand'}
