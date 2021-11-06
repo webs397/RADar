@@ -34,6 +34,7 @@ class Shifter(object):
         you're using with `RPi.GPIO`.
     """
     def __init__(self, data_pin=16, latch_pin=20, clock_pin=21, invert=False):
+        GPIO.setmode(GPIO.BCM)
         self.data_pin = data_pin
         self.latch_pin = latch_pin
         self.clock_pin = clock_pin
@@ -116,7 +117,7 @@ class Shifter(object):
             self.shift_out(0b11111111)
         else:
             self.shift_out(0)
-
+'''
 if __name__=="__main__":
     print("Testing shift register connection...")
     print("Each pin should go HIGH and LOW in order until you press Ctrl-C.")
@@ -127,3 +128,4 @@ if __name__=="__main__":
             s.test()
     except KeyboardInterrupt:
         print("Ctrl-C detected.  Quitting...")
+        '''
