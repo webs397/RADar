@@ -35,11 +35,11 @@ class LEDCONTROLLER:
     def shift_update(self, input):
         # input has to be an 24 bit string containing 0 or 1
         GPIO.output(self.clock,0)
-        sleep(0.05)
+        sleep(0.01)
         GPIO.output(self.latch,0)
-        sleep(0.05)
+        sleep(0.01)
         GPIO.output(self.clock,1)
-        sleep(0.05)
+        sleep(0.01)
 
         '''
         for i in range(23,-1,-1):
@@ -51,20 +51,20 @@ class LEDCONTROLLER:
         # load the data in reverse order
         for i in range(23,-1,-1):
             GPIO.output(self.clock,0)
-            sleep(0.05)
+            sleep(0.01)
             GPIO.output(self.data,int(input[i]))
-            sleep(0.05)
+            sleep(0.01)
             GPIO.output(self.clock,1)
-            sleep(0.05)
+            sleep(0.01)
             #GPIO.output(self.data, 0)
 
         # put latch up to store data on register
         GPIO.output(self.clock, 0)
-        sleep(0.05)
+        sleep(0.01)
         GPIO.output(self.latch,1)
-        sleep(0.05)
+        sleep(0.01)
         GPIO.output(self.clock,1)
-        sleep(0.05)
+        sleep(0.01)
 
     def disp_leds(self,led):
         # number from 1 - 20
