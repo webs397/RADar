@@ -8,8 +8,8 @@ if __name__ == '__main__':
     SSID = 'RADar'
     PASSWORT = 'BDE4Life!'
     FREQUENZ = 10
-    SWITCH = 3
-    LED = 1
+    SWITCH = 16
+    LED = 0
 
     just_switched_on = True
     just_switched_off = True

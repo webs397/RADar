@@ -4,14 +4,14 @@ import math
 import json
 
 # ToF Setup
-i2c0 = I2C(1,scl=Pin(5), sda=Pin(4), freq=100000)
+i2c0 = I2C(scl=Pin(5), sda=Pin(4), freq=100000)
 
 print(i2c0.scan())
 address = 16
 getLidarDataCmd = bytearray([0x5A, 0x05, 0x00, 0x01, 0x60])
 
 # Ultrasonic Setup
-trigger1_pin = 16  # Pin D0
+trigger1_pin = 15  # Pin D0
 trigger2_pin = 12  # Pin D6
 echo1_pin = 14  # Pin D5
 echo2_pin = 13  # Pin D7

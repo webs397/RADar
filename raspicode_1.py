@@ -2,7 +2,7 @@ import zmq
 import time
 from gyro.gyroalarm import *
 from esp_com.pi_udp_server import *
-from led_control.control import *
+from led_control.olliscontroller import *
 
 # ---EXAMPLE PACKAGE---
 # package = {'reason':'demand'}           #the reason can be either 'demand' or 'danger'
@@ -37,7 +37,7 @@ if __name__ == '__main__':
             # Kamera Auslöser
             if myalarm.compute_measurments():
                 msg = {'reason':'danger'}
-                
+
             '''
             if button pressed:
                 msg = {'reason':'demand'}
@@ -47,7 +47,8 @@ if __name__ == '__main__':
             esp_msg = networker.server.receive_data()
             print(esp_msg)
             # --> philipps led-steuercode wird benoetigt
-            led_controller.led_array(esp_msg)
+            #print(esp_msg)
+            led_controller.disp_leds(esp_msg)
             # Frequenz setzen
             time.sleep(1/frequenz)
     
