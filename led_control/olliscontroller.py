@@ -78,12 +78,12 @@ class LEDCONTROLLER:
         GPIO.output(self.latch,1)
         GPIO.output(self.clock,1)
 
-    def twenty_zeros(self):
+    def twentyfour_zeros(self):
         GPIO.output(self.clock,0)
         GPIO.output(self.latch,0)
         GPIO.output(self.clock,1)
 
-        for _ in range(0,20):
+        for _ in range(0,24):
             GPIO.output(self.clock,0)
             GPIO.output(self.data,0)
             GPIO.output(self.clock,1)
