@@ -9,6 +9,7 @@ class LEDCONTROLLER:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup((self.data,self.latch,self.clock),GPIO.OUT)
         self.bithelper = {
+            '0' : '000000000000000000000000',
             '1' : '100000000000000000000000',
             '2' : '110000000000000000000000',
             '3' : '111000000000000000000000',
@@ -34,25 +35,36 @@ class LEDCONTROLLER:
     def shift_update(self, input):
         # input has to be an 24 bit string containing 0 or 1
         GPIO.output(self.clock,0)
+        sleep(0.05)
         GPIO.output(self.latch,0)
+        sleep(0.05)
         GPIO.output(self.clock,1)
+        sleep(0.05)
+
         '''
         for i in range(23,-1,-1):
             GPIO.output(self.clock,0)
             GPIO.output(self.data,0)
             GPIO.output(self.clock,1)
         '''
+
         # load the data in reverse order
         for i in range(23,-1,-1):
             GPIO.output(self.clock,0)
+            sleep(0.05)
             GPIO.output(self.data,int(input[i]))
+            sleep(0.05)
             GPIO.output(self.clock,1)
+            sleep(0.05)
             #GPIO.output(self.data, 0)
 
         # put latch up to store data on register
         GPIO.output(self.clock, 0)
+        sleep(0.05)
         GPIO.output(self.latch,1)
+        sleep(0.05)
         GPIO.output(self.clock,1)
+        sleep(0.05)
 
     def disp_leds(self,led):
         # number from 1 - 20
