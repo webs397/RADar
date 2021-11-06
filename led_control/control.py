@@ -18,13 +18,13 @@ class LEDCONTROLLER:
 
     def led_array(self, dist):
         ones = 0
-        for i in range(dist):
+        for i in range(dist):           #This starts at 0
             ones = ones + (pow(10, i))
         zeros = pow(10, (16 - dist))
         end_value = ones * zeros
         ledpattern = str(end_value)
         reverse_pattern = ledpattern[::-1]
-        #print(reverse_pattern)  # led Status zur Überprüfung
+        print(reverse_pattern)  # led Status zur Überprüfung
         GPIO.output(self.latch, 0)
         for x in range(16):
             GPIO.output(self.data, int(reverse_pattern[x]))
