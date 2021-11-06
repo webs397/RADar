@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import time
+from time import sleep
 
 class LEDCONTROLLER:
     def __init__(self, data_pin, latch_pin, clock_pin):
