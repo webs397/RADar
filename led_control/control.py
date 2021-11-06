@@ -1,17 +1,14 @@
 import RPi.GPIO as GPIO
 import time
- 
-PIN_DATA = 13
-PIN_LATCH = 6
-PIN_CLOCK = 5
+
 
 class LEDCONTROLLER:
     def __init__(self,data_pin, latch_pin, clock_pin):
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
-        GPIO.setup(PIN_DATA, GPIO.OUT)
-        GPIO.setup(PIN_LATCH, GPIO.OUT)
-        GPIO.setup(PIN_CLOCK, GPIO.OUT)
+        GPIO.setup(data_pin, GPIO.OUT)
+        GPIO.setup(latch_pin, GPIO.OUT)
+        GPIO.setup(clock_pin, GPIO.OUT)
         self.data = data_pin
         self.latch = latch_pin
         self.clock = clock_pin

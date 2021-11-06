@@ -3,7 +3,7 @@ import time
 import RPi.GPIO as GPIO
 
 inp = None
-led_controller = LEDCONTROLLER(16,20,21)
+led_controller = LEDCONTROLLER(13,6,5)
 
 while True:
     try:
