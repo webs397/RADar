@@ -11,7 +11,7 @@ address = 16
 getLidarDataCmd = bytearray([0x5A, 0x05, 0x00, 0x01, 0x60])
 
 # Ultrasonic Setup
-trigger1_pin = 15  # Pin D0
+trigger1_pin = 15  # Pin D8
 trigger2_pin = 12  # Pin D6
 echo1_pin = 14  # Pin D5
 echo2_pin = 13  # Pin D7
@@ -41,17 +41,17 @@ def getLidarData(I2C, I2C_ADDR, CMD):
 def SonicDistance(trigger, echo):
     # Pulse Trigger for set Time
     trigger.on()
-    time.sleep(0.00001)
+    time.sleep(trigger_time)
     trigger.off()
     start_time = time.time()
     stop_time = time.time()
 
     # Saving the Start time
-    while echo.IN == 0:
+    while echo.value() == 0:
         start_time = time.time()
 
     # Saving the Stop Time
-    while echo.IN == 1:
+    while echo.value() == 1:
         stop_time = time.time()
 
     # time difference between start and stop
@@ -64,13 +64,16 @@ def SonicDistance(trigger, echo):
 
 
 def scan(scanAmount):
+    print('scanning...')
     sum1 = 0
     sum2 = 0
     sum3 = 0
     for x in range(scanAmount):
         # Read all Sensor distance values
+        print('\t..sonics')
         sensor1 = SonicDistance(trigger1, echo1)
         sensor2 = SonicDistance(trigger2, echo2)
+        print('\t..lidar')
         sensor3 = getLidarData(i2c0, address, getLidarDataCmd) / 100  # convert cm to m
 
         # Collect Values
