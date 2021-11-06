@@ -26,7 +26,6 @@ class Networker:
     def first_exchange(self):
         while True:
             try:
-                os.system("wpa_cli -i wlan0 reconfigure")
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 server_address = (IP_ESP, 5556) 
                 print('connecting to port: ', server_address)
