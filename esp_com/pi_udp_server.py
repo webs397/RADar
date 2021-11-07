@@ -3,7 +3,8 @@ import json
 import os
 import time
 from Crypto.Cipher import AES
-import wifi
+#import wifi
+import select
 
 SECRET = b'BenStinktWieFish'
 HOME_NETWORK = {'ssid' : 'Corona-Emitting 5G Tower', 'password': 'YoushallnotPassword42'}
@@ -18,20 +19,29 @@ class Networker:
         self.password = network_password
         self.my_ip = None
         # connect to network
-        self.first_exchange()
+        #self.first_exchange()
         # server handler
         self.server = Server('', 6969, SECRET)
         #self.server.receive_data()
 
     def first_exchange(self):
-        while True:
+        connected = False
+        reconfigure_counter = 0
+        while not connected:
             try:
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(10)
                 server_address = (IP_ESP, 5556) 
                 print('connecting to port: ', server_address)
                 sock.connect(server_address)
-                break
+                connected = True
+                sock.settimeout(None)
             except:
+                reconfigure_counter += 1
+                if reconfigure_counter == 6:
+                    os.system("wpa_cli -i wlan0 reconfigure")
+                    reconfigure_counter = 0
+                    time.sleep(5)
                 print('not connected yet')
 
         try:
@@ -62,8 +72,10 @@ class Server:
         return decoded
 
     def receive_data(self):
-        print('waiting for messages ...')
-        while True:
+        #print('waiting for messages ...')
+        self.udp_socket.setblocking(0)
+        ready = select.select([self.udp_socket],[],[],0.5)
+        if ready[0]:
             try:
                 (data, _) = self.udp_socket.recvfrom(8192)
                 msg = self.entschluesseln(data)
@@ -72,6 +84,8 @@ class Server:
                 return msg
             except KeyboardInterrupt:
                 self.udp_socket.close()
+        else:
+            return None
     
     def close_connection(self):
         self.udp_socket.close()
