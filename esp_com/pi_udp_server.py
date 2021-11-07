@@ -18,7 +18,7 @@ class Networker:
         self.password = network_password
         self.my_ip = None
         # connect to network
-        self.first_exchange()
+        #self.first_exchange()
         # server handler
         self.server = Server('', 6969, SECRET)
         #self.server.receive_data()
