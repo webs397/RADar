@@ -48,6 +48,7 @@ if __name__ == '__main__':
             # Kamera Auslöser
             if button_status == 0:
                 # IDLE
+                print('status: IDLE')
                 if just_switched:
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.LOW)
@@ -55,6 +56,7 @@ if __name__ == '__main__':
                 pass
             if button_status == 1:
                 # CONNECT & RECEIVE
+                print('status: CONNECT & REICEIVE')
                 if just_switched:
                     GPIO.output(GREEN_LED, GPIO.HIGH)
                     GPIO.output(BLUE_LED, GPIO.LOW)
@@ -78,6 +80,7 @@ if __name__ == '__main__':
 
             if button_status == 2:
                 # UPLOAD
+                print('status: UPLOAD')
                 if just_switched:
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.HIGH)
