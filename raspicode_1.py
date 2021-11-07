@@ -49,6 +49,7 @@ if __name__ == '__main__':
         while True:
             # Kamera Auslöser
             if GPIO.input(BUTTON) == GPIO.HIGH:
+                button_status +=1
                 start = time.time()
                 stop = None
                 just_switched = True
@@ -82,7 +83,7 @@ if __name__ == '__main__':
                     GPIO.output(BLUE_LED, GPIO.LOW)
                     time.sleep(0.25)
                     break
-                
+
             if button_status == 0:
                 # IDLE
                 print('status: IDLE')
