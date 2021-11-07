@@ -72,15 +72,14 @@ class Server:
 
     def receive_data(self):
         print('waiting for messages ...')
-        while True:
-            try:
-                (data, _) = self.udp_socket.recvfrom(8192)
-                msg = self.entschluesseln(data)
-                msg = json.loads(msg)
-                # print('received: ', msg, 'from :', addr)
-                return msg
-            except KeyboardInterrupt:
-                self.udp_socket.close()
+        try:
+            (data, _) = self.udp_socket.recvfrom(8192)
+            msg = self.entschluesseln(data)
+            msg = json.loads(msg)
+            # print('received: ', msg, 'from :', addr)
+            return msg
+        except KeyboardInterrupt:
+            self.udp_socket.close()
     
     def close_connection(self):
         self.udp_socket.close()
