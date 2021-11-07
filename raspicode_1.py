@@ -3,6 +3,7 @@ import time
 from gyro.gyroalarm import *
 from esp_com.pi_udp_server import *
 from led_control.olliscontroller import *
+from wifi_helper import *
 
 # ---EXAMPLE PACKAGE---
 # package = {'reason':'demand'}           #the reason can be either 'demand' or 'danger'
