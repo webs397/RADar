@@ -72,9 +72,9 @@ class Server:
         return decoded
 
     def receive_data(self):
-        print('waiting for messages ...')
+        #print('waiting for messages ...')
         self.udp_socket.setblocking(0)
-        ready = select.select([self.udp_socket],[],[],1)
+        ready = select.select([self.udp_socket],[],[],0.5)
         if ready[0]:
             try:
                 (data, _) = self.udp_socket.recvfrom(8192)
