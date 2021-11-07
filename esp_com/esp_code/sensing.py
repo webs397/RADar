@@ -1,6 +1,5 @@
 from machine import Pin, I2C
 import time
-import math
 import json
 
 # ToF Setup
@@ -13,16 +12,24 @@ getLidarDataCmd = bytearray([0x5A, 0x05, 0x00, 0x01, 0x60])
 # Ultrasonic Setup
 trigger1_pin = 15  # Pin D8
 trigger2_pin = 12  # Pin D6
-echo1_pin = 14  # Pin D5
-echo2_pin = 13  # Pin D7
+echo1_pin = 13  # Pin D5
+echo2_pin = 14  # Pin D7
 trigger_time = 0.00001  # This is 0.01ms
 
 # set GPIO in or out
-trigger1 = Pin(trigger1_pin, Pin.OUT)
-echo1 = Pin(echo1_pin, Pin.IN, None)  # Dont know if Pull-Up is needed or not (echo1_pin, Pin.IN, Pin.PULL_UP) if so
+trigger1 = machine.Pin(trigger1_pin, machine.Pin.OUT)
+trigger1.off()
+echo1 = machine.Pin(echo1_pin,
+                    machine.Pin.IN)  # Dont know if Pull-Up is needed or not (echo1_pin, Pin.IN, Pin.PULL_UP) if so
 
-trigger2 = Pin(trigger2_pin, Pin.OUT)
-echo2 = Pin(echo2_pin, Pin.IN, None)  # # Dont know if Pull-Up is needed or not (echo2_pin, Pin.IN, Pin.PULL_UP) if so
+trigger2 = machine.Pin(trigger2_pin, machine.Pin.OUT)
+trigger2.off()
+echo2 = machine.Pin(echo2_pin,
+                    machine.Pin.IN)  # # Dont know if Pull-Up is needed or not (echo2_pin, Pin.IN, Pin.PULL_UP) if so
+
+sensor1Average = 0.0
+sensor2Average = 0.0
+sensor3Average = 0.0
 
 
 def getLidarData(I2C, I2C_ADDR, CMD):
@@ -36,35 +43,31 @@ def getLidarData(I2C, I2C_ADDR, CMD):
         strength = temp[4] + temp[5] * 256
         temperature = (temp[6] + temp[7] * 256) / 8 - 256
         print("Distance: =%5dcm, Strength = %5d, Temperature = %5d°C" % (tofDistance, strength, temperature))
+    return tofDistance
 
 
 def SonicDistance(trigger, echo):
-    # Pulse Trigger for set Time
-    trigger.on()
-    time.sleep(trigger_time)
     trigger.off()
-    start_time = time.time()
-    stop_time = time.time()
+    time.sleep_us(2)
+    trigger.on()
+    time.sleep_us(10)
+    trigger.off()
 
-    # Saving the Start time
     while echo.value() == 0:
-        start_time = time.time()
-
-    # Saving the Stop Time
+        pass
+    t1 = time.ticks_us()
     while echo.value() == 1:
-        stop_time = time.time()
+        pass
+    t2 = time.ticks_us()
+    cm = (t2 - t1) / 58.0
+    print(cm)
+    time.sleep(2)
 
-    # time difference between start and stop
-    time_taken = stop_time - start_time
-
-    # Calculate distance with sonic speed (343.2 m/s) and divide by two for there and back
-    sonicDistance = (time_taken * 343.2) / 2
-
-    return sonicDistance
+    return SonicDistance
 
 
 def scan(scanAmount):
-    print('scanning...')
+    # print('scanning...')
     sum1 = 0
     sum2 = 0
     sum3 = 0
@@ -74,7 +77,7 @@ def scan(scanAmount):
         sensor1 = SonicDistance(trigger1, echo1)
         sensor2 = SonicDistance(trigger2, echo2)
         print('\t..lidar')
-        sensor3 = getLidarData(i2c0, address, getLidarDataCmd) / 100  # convert cm to m
+        sensor3 = getLidarData(i2c0, address, getLidarDataCmd) / 100.00  # convert cm to m
 
         # Collect Values
         sum1 += sensor1
@@ -93,11 +96,12 @@ def scan(scanAmount):
     print(sensor1Average)
     print("Sensor2:")
     print(sensor2Average)
+    '''
     print("Sensor3:")
     print(sensor3Average)
     print("-----------------------")
-
-    # return sensor1Average, sensor2Average, sensor3Average
+    '''
+    return sensor1Average, sensor2Average, sensor3Average
 
 
 # Update LEDs for Sensor values and package activated sensor and led value as JSON
@@ -110,29 +114,29 @@ def update():
     # Sensor Cutoffs (using ceil so the number is rounded up)
     if sensor1Average <= 2:
         if sensor1Average < 0.5:
-            led = int(math.ceil(sensor1Average))
+            led = int(sensor1Average)
             activatedSensor = "Sensor1"
         else:
             led = int(round(sensor1Average))
             activatedSensor = "Sensor1"
     elif sensor2Average <= 4:
-        led = int(math.floor(sensor2Average))
+        led = int(sensor2Average)
         activatedSensor = "Sensor2"
     elif sensor3Average <= 10:
-        led = int(math.floor(sensor3Average))
+        led = int(sensor3Average)
         activatedSensor = "Sensor3"
     else:
         led = 0
 
     data = {"Activated Sensor: ": activatedSensor, "Led Value: ": led}
-    message = json.dumps(data)
+    #data = {"Lidar: ": sensor3Average}
+    # message = json.dumps(data)
 
-    return message
+    return data
+
 
 # BEISPIELCODE
-'''
-while True:
-    scan(5)
-    update()
-    time.sleep(1)
-'''
+
+
+
+
