@@ -19,6 +19,16 @@ def req_and_resp(package):
 
 if __name__ == '__main__':
     # ---HANDLER---
+    # button & LED
+    GREEN_LED = 11
+    BLUE_LED = 9
+    BUTTON = 10
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup((GREEN_LED, BLUE_LED), GPIO.OUT)
+    GPIO.setup(BUTTON, GPIO.IN)
+    just_switched = True
+    button_status = 0 # 0: idle, 1: connect & receive, 2: upload
+    #frequenz
     frequenz = 20
     # kamera
     context = zmq.Context()
@@ -33,15 +43,7 @@ if __name__ == '__main__':
     PIN_LATCH = 20
     PIN_CLOCK = 21
     led_controller = LEDCONTROLLER(PIN_DATA, PIN_LATCH, PIN_CLOCK)
-    # button & LED
-    GREEN_LED = 11
-    BLUE_LED = 9
-    BUTTON = 10
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup((GREEN_LED, BLUE_LED), GPIO.OUT)
-    GPIO.setup(BUTTON, GPIO.IN)
-    just_switched = True
-    button_status = 0 # 0: idle, 1: connect & receive, 2: upload
+    
     # ---LOOPING---
     try:
         while True:
@@ -53,7 +55,7 @@ if __name__ == '__main__':
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.LOW)
                     just_switched = False
-                pass
+                
             if button_status == 1:
                 # CONNECT & RECEIVE
                 print('status: CONNECT & REICEIVE')
@@ -85,7 +87,7 @@ if __name__ == '__main__':
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.HIGH)
                     just_switched = False
-                pass
+                
 
             if GPIO.input(BUTTON) == GPIO.HIGH:
                 start = time.time()
