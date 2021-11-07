@@ -4,6 +4,7 @@ import os
 import time
 from Crypto.Cipher import AES
 #import wifi
+import select
 
 SECRET = b'BenStinktWieFish'
 HOME_NETWORK = {'ssid' : 'Corona-Emitting 5G Tower', 'password': 'YoushallnotPassword42'}
@@ -72,14 +73,19 @@ class Server:
 
     def receive_data(self):
         print('waiting for messages ...')
-        try:
-            (data, _) = self.udp_socket.recvfrom(8192)
-            msg = self.entschluesseln(data)
-            msg = json.loads(msg)
-            # print('received: ', msg, 'from :', addr)
-            return msg
-        except KeyboardInterrupt:
-            self.udp_socket.close()
+        self.udp_socket.setblocking(0)
+        ready = select.select([self.udp_socket],[],[],1)
+        if ready[0]:
+            try:
+                (data, _) = self.udp_socket.recvfrom(8192)
+                msg = self.entschluesseln(data)
+                msg = json.loads(msg)
+                # print('received: ', msg, 'from :', addr)
+                return msg
+            except KeyboardInterrupt:
+                self.udp_socket.close()
+        else:
+            return None
     
     def close_connection(self):
         self.udp_socket.close()
