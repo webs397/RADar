@@ -123,8 +123,12 @@ if __name__ == '__main__':
                     break
             # Frequenz setzen
             time.sleep(1/frequenz)
+    except KeyboardInterrupt:
+        print('aborting')
+        #GPIO.cleanup()
     except Exception as e:
         print('there was the following error: ', e)
     finally:
         print("I'M OUT")
+        GPIO.cleanup()
         pass 
