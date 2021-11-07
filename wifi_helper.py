@@ -13,7 +13,7 @@ class Finder:
         self.main_dict = {}
 
     def run(self):
-        command = """sudo iwlist wlp2s0 scan | grep -ioE 'ssid:"(.*{}.*)'"""
+        command = """sudo iwlist wlan0 scan | grep -ioE 'ssid:"(.*{}.*)'"""
         result = os.popen(command.format(self.server_name))
         result = list(result)
 
