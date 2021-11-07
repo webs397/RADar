@@ -25,6 +25,7 @@ class Networker:
 
     def first_exchange(self):
         connected = False
+        reconfigure_counter = 0
         while not connected:
             try:
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,8 +36,11 @@ class Networker:
                 connected = True
                 sock.settimeout(None)
             except:
-                os.system("wpa_cli -i wlan0 reconfigure")
-                #time.sleep(2)
+                reconfigure_counter += 1
+                if reconfigure_counter == 10:
+                    os.system("wpa_cli -i wlan0 reconfigure")
+                    reconfigure_counter = 0
+                    time.sleep(5)
                 print('not connected yet')
 
         try:
