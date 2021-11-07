@@ -37,7 +37,7 @@ class Networker:
                 sock.settimeout(None)
             except:
                 reconfigure_counter += 1
-                if reconfigure_counter == 10:
+                if reconfigure_counter == 6:
                     os.system("wpa_cli -i wlan0 reconfigure")
                     reconfigure_counter = 0
                     time.sleep(5)
