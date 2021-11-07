@@ -6,6 +6,7 @@ from led_control.olliscontroller import *
 from wifi_helper import *
 import RPi.GPIO as GPIO
 
+
 # ---EXAMPLE PACKAGE---
 # package = {'reason':'demand'}           #the reason can be either 'demand' or 'danger'
 
@@ -84,13 +85,43 @@ if __name__ == '__main__':
                 pass
 
             if GPIO.input(BUTTON) == GPIO.HIGH:
+                start = time.time()
+                stop = None
                 just_switched = True
                 if button_status >=3:
                     button_status = 0
-            
+                while True:
+                    if GPIO.input(BUTTON) == GPIO.LOW:
+                        stop = time.time()
+                        break
+                passed_time = stop - start
+                if passed_time >=5:
+                    GPIO.output(GREEN_LED, GPIO.LOW)
+                    GPIO.output(BLUE_LED, GPIO.LOW)
+                    time.sleep(0.25)
+                    GPIO.output(GREEN_LED, GPIO.HIGH)
+                    GPIO.output(BLUE_LED, GPIO.HIGH)
+                    time.sleep(0.25)
+                    GPIO.output(GREEN_LED, GPIO.LOW)
+                    GPIO.output(BLUE_LED, GPIO.LOW)
+                    time.sleep(0.25)
+                    GPIO.output(GREEN_LED, GPIO.HIGH)
+                    GPIO.output(BLUE_LED, GPIO.HIGH)
+                    time.sleep(0.25)
+                    GPIO.output(GREEN_LED, GPIO.LOW)
+                    GPIO.output(BLUE_LED, GPIO.LOW)
+                    time.sleep(0.25)
+                    GPIO.output(GREEN_LED, GPIO.HIGH)
+                    GPIO.output(BLUE_LED, GPIO.HIGH)
+                    time.sleep(0.25)
+                    GPIO.output(GREEN_LED, GPIO.LOW)
+                    GPIO.output(BLUE_LED, GPIO.LOW)
+                    time.sleep(0.25)
+                    break
             # Frequenz setzen
             time.sleep(1/frequenz)
     except Exception as e:
         print('there was the following error: ', e)
     finally:
-        pass
+        print("I'M OUT")
+        pass 
