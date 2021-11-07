@@ -48,47 +48,6 @@ if __name__ == '__main__':
     try:
         while True:
             # Kamera Auslöser
-            if button_status == 0:
-                # IDLE
-                print('status: IDLE')
-                if just_switched:
-                    GPIO.output(GREEN_LED, GPIO.LOW)
-                    GPIO.output(BLUE_LED, GPIO.LOW)
-                    just_switched = False
-                
-            if button_status == 1:
-                # CONNECT & RECEIVE
-                print('status: CONNECT & REICEIVE')
-                if just_switched:
-                    GPIO.output(GREEN_LED, GPIO.HIGH)
-                    GPIO.output(BLUE_LED, GPIO.LOW)
-                    just_switched = False
-                if myalarm.compute_measurments():
-                    msg = {'reason':'danger'}
-
-                '''
-                if button pressed:
-                    msg = {'reason':'demand'}
-                '''
-                
-                # Daten kriegen und die LEDs entsprechend schalten
-                esp_msg = networker.server.receive_data()
-                print(esp_msg)
-                # --> philipps led-steuercode wird benoetigt
-                #print(esp_msg)
-                #if not(esp_msg == None):
-                    #led_controller.disp_leds(esp_msg)
-                
-
-            if button_status == 2:
-                # UPLOAD
-                print('status: UPLOAD')
-                if just_switched:
-                    GPIO.output(GREEN_LED, GPIO.LOW)
-                    GPIO.output(BLUE_LED, GPIO.HIGH)
-                    just_switched = False
-                
-
             if GPIO.input(BUTTON) == GPIO.HIGH:
                 start = time.time()
                 stop = None
@@ -123,6 +82,47 @@ if __name__ == '__main__':
                     GPIO.output(BLUE_LED, GPIO.LOW)
                     time.sleep(0.25)
                     break
+                
+            if button_status == 0:
+                # IDLE
+                print('status: IDLE')
+                if just_switched:
+                    GPIO.output(GREEN_LED, GPIO.LOW)
+                    GPIO.output(BLUE_LED, GPIO.LOW)
+                    just_switched = False
+                
+            elif button_status == 1:
+                # CONNECT & RECEIVE
+                print('status: CONNECT & REICEIVE')
+                if just_switched:
+                    GPIO.output(GREEN_LED, GPIO.HIGH)
+                    GPIO.output(BLUE_LED, GPIO.LOW)
+                    just_switched = False
+                if myalarm.compute_measurments():
+                    msg = {'reason':'danger'}
+
+                '''
+                if button pressed:
+                    msg = {'reason':'demand'}
+                '''
+                
+                # Daten kriegen und die LEDs entsprechend schalten
+                esp_msg = networker.server.receive_data()
+                print(esp_msg)
+                # --> philipps led-steuercode wird benoetigt
+                #print(esp_msg)
+                #if not(esp_msg == None):
+                    #led_controller.disp_leds(esp_msg)
+                
+
+            if button_status == 2:
+                # UPLOAD
+                print('status: UPLOAD')
+                if just_switched:
+                    GPIO.output(GREEN_LED, GPIO.LOW)
+                    GPIO.output(BLUE_LED, GPIO.HIGH)
+                    just_switched = False
+            
             # Frequenz setzen
             time.sleep(1/frequenz)
     except KeyboardInterrupt:
