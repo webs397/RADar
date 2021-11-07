@@ -3,7 +3,7 @@ import json
 import os
 import time
 from Crypto.Cipher import AES
-import wifi
+#import wifi
 
 SECRET = b'BenStinktWieFish'
 HOME_NETWORK = {'ssid' : 'Corona-Emitting 5G Tower', 'password': 'YoushallnotPassword42'}
