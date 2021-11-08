@@ -122,7 +122,7 @@ if __name__ == '__main__':
                     # --> philipps led-steuercode wird benoetigt
                     #print(esp_msg)
                     if not(esp_msg == None):
-                        led_controller.disp_leds(esp_msg['Led Value'])
+                        led_controller.disp_leds(esp_msg['Led Value: '])
                 
             if button_status == 2:
                 # UPLOAD
