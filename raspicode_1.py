@@ -135,6 +135,7 @@ if __name__ == '__main__':
                     just_switched = False
                 print('this is a BAUSTELLE')
                 button_status = 0
+                just_switched = True
 
             # Frequenz setzen
             time.sleep(1/frequenz)
