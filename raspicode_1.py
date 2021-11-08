@@ -98,7 +98,7 @@ if __name__ == '__main__':
             elif button_status == 1:
                 # CONNECT & RECEIVE
                 print('status: CONNECT & REICEIVE')
-                if get_connect_status:
+                if not get_connect_status:
                     # try to find the esp network
                     print('reconfiguring network')
                     os.system("wpa_cli -i wlan0 reconfigure")
@@ -132,7 +132,7 @@ if __name__ == '__main__':
                     GPIO.output(BLUE_LED, GPIO.HIGH)
                     just_switched = False
 
-                if get_connect_status:
+                if not get_connect_status:
                     # connect to cloud an upload
                     print('uploaded')
                     button_status = 0
