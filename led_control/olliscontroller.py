@@ -1,12 +1,14 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
+# WE NEED GPIO.BCM
+
 class LEDCONTROLLER:
     def __init__(self, data_pin, latch_pin, clock_pin):
         self.data = data_pin
         self.latch = latch_pin
         self.clock = clock_pin
-        GPIO.setmode(GPIO.BCM)
+        #GPIO.setmode(GPIO.BCM)
         GPIO.setup((self.data,self.latch,self.clock),GPIO.OUT)
         self.bithelper = {
             '0' : '000000000000000000000000',
