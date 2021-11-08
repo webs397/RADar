@@ -93,6 +93,7 @@ if __name__ == '__main__':
                 if just_switched:
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.LOW)
+                    led_controller.disp_leds(20)
                     just_switched = False
                 
             elif button_status == 1:
