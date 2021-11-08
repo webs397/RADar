@@ -1,5 +1,6 @@
 from googleapiclient.http import MediaFileUpload
 from Google import Create_Service
+import os
 
 CLIENT_SECRET_FILE = 'client_secret_file.json'
 API_NAME = 'drive'
@@ -11,6 +12,9 @@ service = Create_Service(CLIENT_SECRET_FILE,API_NAME,API_VERSION,SCOPES)
 folder_id = '1pHL26t0oeDGo7h0FmMMQ08e76J0JaTRn'
 
 file_names = []
+for item in os.scandir('~/RADar/videos/'):
+    file_names.append(item)
+
 mime_types = ['application/vnd.google-apps.video']
 
 for file_name in file_names:
@@ -19,7 +23,7 @@ for file_name in file_names:
         'parents': [folder_id]
     }
 
-    media = MediaFileUpload('~/RADar/danger/{0}'.format(file_name), mimetype='application/vnd.google-apps.video')
+    media = MediaFileUpload('~/RADar/videos/{0}'.format(file_name), mimetype='application/vnd.google-apps.video')
     service.files().create(
         body=file.metadata,
         media_body=media,
