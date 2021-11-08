@@ -41,9 +41,9 @@ if __name__ == '__main__':
     # networker
     networker = Networker('ST', 'RADar', 'BDE4Life!')
     # led controller
-    PIN_DATA = 16
-    PIN_LATCH = 20
-    PIN_CLOCK = 21
+    PIN_DATA = 13
+    PIN_LATCH = 6
+    PIN_CLOCK = 5
     led_controller = LEDCONTROLLER(PIN_DATA, PIN_LATCH, PIN_CLOCK)
     
     # ---LOOPING---
