@@ -94,6 +94,7 @@ if __name__ == '__main__':
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.LOW)
                     led_controller.disp_leds(20)
+                    time.sleep(0.2)
                     just_switched = False
                 
             elif button_status == 1:
