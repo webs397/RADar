@@ -131,15 +131,8 @@ if __name__ == '__main__':
                     GPIO.output(GREEN_LED, GPIO.LOW)
                     GPIO.output(BLUE_LED, GPIO.HIGH)
                     just_switched = False
-
-                if not get_connect_status:
-                    # connect to cloud an upload
-                    print('uploaded')
-                    button_status = 0
-                else:
-                    print('reconfiguring network')
-                    os.system("wpa_cli -i wlan0 reconfigure")
-                    time.sleep(3)
+                print('this is a BAUSTELLE')
+                button_status = 0
 
             # Frequenz setzen
             time.sleep(1/frequenz)
