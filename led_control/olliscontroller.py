@@ -51,7 +51,7 @@ class LEDCONTROLLER:
         '''
 
         # load the data in reverse order
-        for i in range(0,25):
+        for i in range(0,24):
             GPIO.output(self.clock,0)
             sleep(0.001)
             GPIO.output(self.data,int(input[i]))
